@@ -21,3 +21,16 @@ class ClaudeSonnet:
             messages=[{"role": "user", "content": prompt}],
         )
         return msg.content[0].text
+    
+    def generate_with_tool(self, prompt: str, max_tokens: int = 256, tools: list = None) -> str:
+        msg = self.client.messages.create(
+            model=self.model,
+            max_tokens=max_tokens,
+            tools=tools,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return msg.content[0].text
+    
+    def append_historik(self) -> str:
+        response = self.client.messages.create()
+        return response

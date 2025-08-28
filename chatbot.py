@@ -6,14 +6,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Importing model
-from claude_sonnet import client, message
 from claude_sonnet import ClaudeSonnet
 
 # arxiv API functions
-from arxiv_functions import search_papers, extract_info
+from arxiv_tools_functions import search_papers, extract_info
 
-## Setting local directory name for retreived data
-PAPER_DIR = "papers"
+PAPER_DIR = "papers" ## Setting local directory name for retreived data
 
 
 ## Setting tools & mapping
@@ -53,6 +51,7 @@ tools = [
     }
 ]
 
+## Defining maping functions
 mapping_tool_function = {
     "search_papers": search_papers,
     "extract_info": extract_info
@@ -60,7 +59,15 @@ mapping_tool_function = {
 
 ## Defining functions - tools execution 
 def execute_tool(tool_name, tool_args):
-    
+    """Execute a tool function from the mapping.
+
+    Args:
+        tool_name (str): The name of the tool to execute.
+        tool_args (dict): The arguments to pass to the tool function.
+
+    Returns:
+        str: The result of the tool execution, formatted as string or JSON.
+    """
     result = mapping_tool_function[tool_name](**tool_args)
 
     if result is None:
@@ -79,7 +86,6 @@ def execute_tool(tool_name, tool_args):
     return result
 
 ## Defining functions - chating & wrapping  
-
 def process_query(query):
     # Étape 1 — ENVOYER LA QUESTION AU MODÈLE (avec outils activés)
     # 1.1 Préparer l'historique avec le message utilisateur
@@ -87,14 +93,9 @@ def process_query(query):
     
     # 1.2 Premier appel au modèle : il peut répondre en texte
     #     OU demander d'utiliser un outil (tool_use)
-    response = client.messages.create(
-        max_tokens=2024,
-        model='claude-3-7-sonnet-20250219',
-        tools=tools,
-        messages=messages
-    )
+    response = ClaudeSonnet.generate_with_tool(messages,100,tools)
     keep_looping = True
-
+    
     # Étape 4 — BOUCLE JUSQU’À LA RÉPONSE FINALE
     while keep_looping:
         assistant_content = []  # contiendra le texte + éventuels tool_use de CE tour
@@ -142,9 +143,12 @@ def process_query(query):
                 })
 
                 # 3.5 Relancer le modèle avec l'historique mis à jour
-                response = client.messages.create
+                #response = client.messages.create # a remplacer 
+                response = ClaudeSonnet.continue_with_history(messages, 
+                                                              max_tokens= 100, 
+                                                              tools=mapping_tool_function)
 
-## Defining loop for chat
+## Defining overlall loop for chat/ conversation 
 def chat_loop():
     print("Type your queries or 'quit' to exit.")
     while True:
