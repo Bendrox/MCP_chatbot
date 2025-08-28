@@ -1,18 +1,18 @@
-## Importing packages
-import json
-
-# Loading envir variables
+## Importing packages + Loading envir variables
 from dotenv import load_dotenv
 load_dotenv()
+import json 
 
-# Importing model
+# Internal Importing
 from claude_sonnet import ClaudeSonnet
-
-# arxiv API functions
 from arxiv_tools_functions import search_papers, extract_info
 
-PAPER_DIR = "papers" ## Setting local directory name for retreived data
+## Setting
+PAPER_DIR = "papers" # local directory name for retreived data
+max_token_fix= 250
 
+
+claude_client = ClaudeSonnet() 
 
 ## Setting tools & mapping
 tools = [
@@ -93,7 +93,7 @@ def process_query(query):
     
     # 1.2 Premier appel au modèle : il peut répondre en texte
     #     OU demander d'utiliser un outil (tool_use)
-    response = ClaudeSonnet.generate_with_tool(messages,100,tools)
+    response = claude_client.generate_with_tools(messages,100,tools)
     keep_looping = True
     
     # Étape 4 — BOUCLE JUSQU’À LA RÉPONSE FINALE
@@ -144,8 +144,8 @@ def process_query(query):
 
                 # 3.5 Relancer le modèle avec l'historique mis à jour
                 #response = client.messages.create # a remplacer 
-                response = ClaudeSonnet.continue_with_history(messages, 
-                                                              max_tokens= 100, 
+                response = claude_client.continue_with_history(messages, 
+                                                              max_tokens= max_token_fix, 
                                                               tools=mapping_tool_function)
 
 ## Defining overlall loop for chat/ conversation 

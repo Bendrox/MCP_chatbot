@@ -4,6 +4,8 @@ from typing import Optional
 import anthropic
 from dotenv import load_dotenv
 load_dotenv() 
+from typing import Any, Dict, List, Optional
+
 
 MODEL_NAME = "claude-sonnet-4-20250514"  # remplace par l’ID exact que tu utilises
 api_key = os.getenv("ANTHROPIC_API_KEY")
@@ -22,15 +24,26 @@ class ClaudeSonnet:
         )
         return msg.content[0].text
     
-    def generate_with_tool(self, prompt: str, max_tokens: int = 256, tools: list = None) -> str:
+    def generate_with_tools(self, messages: List[Dict], max_tokens: int = 256, tools=None):
+        """
+        Génère une réponse avec support des outils
+        """
         msg = self.client.messages.create(
             model=self.model,
             max_tokens=max_tokens,
             tools=tools,
-            messages=[{"role": "user", "content": prompt}],
+            messages=messages,
         )
-        return msg.content[0].text
+        return msg
+
     
-    def append_historik(self) -> str:
-        response = self.client.messages.create()
-        return response
+    def continue_with_history(
+        self,
+        messages ,
+        max_tokens: int = 256,
+        tools: Optional[List[Dict[str, Any]]] = None,
+    ):
+        """
+        Relance le modèle avec l'historique mis à jour 
+        """
+        return self.generate_with_tools(messages, max_tokens=max_tokens, tools=tools)
