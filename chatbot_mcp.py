@@ -4,10 +4,13 @@ import os
 from typing import List
 from dotenv import load_dotenv
 import arxiv # pour l’API d’arXiv.org: dépôt d’articles scientifiques
-import anthropic
+
+# loading env variables
 from dotenv import load_dotenv
 load_dotenv()
-from claude_sonnet4 import client, message
+
+# importing model
+from claude_sonnet_4 import client, message
 
 
 ## Setting local directory name for retreived data

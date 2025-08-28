@@ -1,20 +1,9 @@
 import os
 from dotenv import load_dotenv
-import anthropic
-
 load_dotenv()
-api_key = os.getenv("ANTHROPIC_API_KEY")
 
-client = anthropic.Anthropic()
+from claude_sonnet import ClaudeSonnet
 
-message = client.messages.create(
-    model="claude-sonnet-4-20250514",
-    max_tokens=20,
-    messages=[
-        {
-            "role": "user",
-            "content": "Test"
-        }
-    ]
-)
-print(message.content[0].text)
+model = ClaudeSonnet()
+reponse = model.generate('Test', 20)
+print(reponse)
