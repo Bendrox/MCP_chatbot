@@ -1,5 +1,5 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 import anthropic
 
 load_dotenv()
@@ -9,7 +9,7 @@ client = anthropic.Anthropic()
 
 message = client.messages.create(
     model="claude-sonnet-4-20250514",
-    max_tokens=10,
+    max_tokens=20,
     messages=[
         {
             "role": "user",
@@ -17,4 +17,4 @@ message = client.messages.create(
         }
     ]
 )
-print(message.content)
+print(message.content[0].text)
