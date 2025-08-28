@@ -146,7 +146,7 @@ def process_query(query):
                 #response = client.messages.create # a remplacer 
                 response = claude_client.continue_with_history(messages, 
                                                               max_tokens= max_token_fix, 
-                                                              tools=mapping_tool_function)
+                                                              tools=tools)
 
 ## Defining overlall loop for chat/ conversation 
 def chat_loop():
