@@ -1,0 +1,1 @@
+regex:\bsk-ant-[A-Za-z0-9_\-:]{8,}\b==>REDACTED
