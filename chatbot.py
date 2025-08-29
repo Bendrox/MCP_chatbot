@@ -57,9 +57,7 @@ mapping_tool_function = {
     "extract_info": extract_info
 }
 
-
 ## Defining functions - tools execution 
-@mcp.tool()
 def execute_tool(tool_name, tool_args):
     """Execute a tool function from the mapping.
 
@@ -88,7 +86,6 @@ def execute_tool(tool_name, tool_args):
     return result
 
 ## Defining functions - chating & wrapping  
-@mcp.tool()
 def process_query(query):
     # Étape 1 — ENVOYER LA QUESTION AU MODÈLE (avec outils activés)
     # 1.1 Préparer l'historique avec le message utilisateur

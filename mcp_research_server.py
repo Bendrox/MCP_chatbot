@@ -3,12 +3,14 @@ from mcp.server.fastmcp import FastMCP
 import json
 import os
 from typing import Any, Dict, List, Optional
-from chatbot import PAPER_DIR
 import arxiv
+
+PAPER_DIR = "papers" # local directory name for retreived data
 
 # Init mcp server
 mcp = FastMCP("research")
 
+@mcp.tool()
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
     """
     Search for papers on arXiv based on a topic and store their information.
