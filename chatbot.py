@@ -9,9 +9,9 @@ from arxiv_tools_functions import search_papers, extract_info
 
 ## Setting
 PAPER_DIR = "papers" # local directory name for retreived data
-max_token_fix= 250
+max_token_fix= 200
 
-
+# Init claude language model 
 claude_client = ClaudeSonnet() 
 
 ## Setting tools & mapping
@@ -57,7 +57,9 @@ mapping_tool_function = {
     "extract_info": extract_info
 }
 
+
 ## Defining functions - tools execution 
+@mcp.tool()
 def execute_tool(tool_name, tool_args):
     """Execute a tool function from the mapping.
 
@@ -86,6 +88,7 @@ def execute_tool(tool_name, tool_args):
     return result
 
 ## Defining functions - chating & wrapping  
+@mcp.tool()
 def process_query(query):
     # Étape 1 — ENVOYER LA QUESTION AU MODÈLE (avec outils activés)
     # 1.1 Préparer l'historique avec le message utilisateur
@@ -164,4 +167,4 @@ def chat_loop():
             print(f"\nError: {e}")
 
 if __name__ == "__main__":
-    chat_loop()
+    chat_loop() #chat mode 
