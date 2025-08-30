@@ -1,0 +1,56 @@
+{
+  "1809.01431v2": {
+    "title": "Pre-training on high-resource speech recognition improves low-resource speech-to-text translation",
+    "authors": [
+      "Sameer Bansal",
+      "Herman Kamper",
+      "Karen Livescu",
+      "Adam Lopez",
+      "Sharon Goldwater"
+    ],
+    "summary": "We present a simple approach to improve direct speech-to-text translation\n(ST) when the source language is low-resource: we pre-train the model on a\nhigh-resource automatic speech recognition (ASR) task, and then fine-tune its\nparameters for ST. We demonstrate that our approach is effective by\npre-training on 300 hours of English ASR data to improve Spanish-English ST\nfrom 10.8 to 20.2 BLEU when only 20 hours of Spanish-English ST training data\nare available. Through an ablation study, we find that the pre-trained encoder\n(acoustic model) accounts for most of the improvement, despite the fact that\nthe shared language in these tasks is the target language text, not the source\nlanguage audio. Applying this insight, we show that pre-training on ASR helps\nST even when the ASR language differs from both source and target ST languages:\npre-training on French ASR also improves Spanish-English ST. Finally, we show\nthat the approach improves performance on a true low-resource task:\npre-training on a combination of English ASR and French ASR improves\nMboshi-French ST, where only 4 hours of data are available, from 3.5 to 7.1\nBLEU.",
+    "pdf_url": "http://arxiv.org/pdf/1809.01431v2",
+    "published": "2018-09-05"
+  },
+  "1612.07486v2": {
+    "title": "Continuous multilinguality with language vectors",
+    "authors": [
+      "Robert \u00d6stling",
+      "J\u00f6rg Tiedemann"
+    ],
+    "summary": "Most existing models for multilingual natural language processing (NLP) treat\nlanguage as a discrete category, and make predictions for either one language\nor the other. In contrast, we propose using continuous vector representations\nof language. We show that these can be learned efficiently with a\ncharacter-based neural language model, and used to improve inference about\nlanguage varieties not seen during training. In experiments with 1303 Bible\ntranslations into 990 different languages, we empirically explore the capacity\nof multilingual language models, and also show that the language vectors\ncapture genetic relationships between languages.",
+    "pdf_url": "http://arxiv.org/pdf/1612.07486v2",
+    "published": "2016-12-22"
+  },
+  "2408.10441v1": {
+    "title": "Goldfish: Monolingual Language Models for 350 Languages",
+    "authors": [
+      "Tyler A. Chang",
+      "Catherine Arnett",
+      "Zhuowen Tu",
+      "Benjamin K. Bergen"
+    ],
+    "summary": "For many low-resource languages, the only available language models are large\nmultilingual models trained on many languages simultaneously. However, using\nFLORES perplexity as a metric, we find that these models perform worse than\nbigrams for many languages (e.g. 24% of languages in XGLM 4.5B; 43% in BLOOM\n7.1B). To facilitate research that focuses on low-resource languages, we\npre-train and release Goldfish, a suite of monolingual autoregressive\nTransformer language models up to 125M parameters for 350 languages. The\nGoldfish reach lower FLORES perplexities than BLOOM, XGLM, and MaLA-500 on 98\nof 204 FLORES languages, despite each Goldfish model being over 10x smaller.\nHowever, the Goldfish significantly underperform larger multilingual models on\nreasoning benchmarks, suggesting that for low-resource languages,\nmultilinguality primarily improves general reasoning abilities rather than\nbasic text generation. We release models trained on 5MB (350 languages), 10MB\n(288 languages), 100MB (166 languages), and 1GB (83 languages) of text data\nwhere available. The Goldfish models are available as baselines, fine-tuning\nsources, or augmentations to existing models in low-resource NLP research, and\nthey are further useful for crosslinguistic studies requiring maximally\ncomparable models across languages.",
+    "pdf_url": "http://arxiv.org/pdf/2408.10441v1",
+    "published": "2024-08-19"
+  },
+  "2108.02170v1": {
+    "title": "Curriculum learning for language modeling",
+    "authors": [
+      "Daniel Campos"
+    ],
+    "summary": "Language Models like ELMo and BERT have provided robust representations of\nnatural language, which serve as the language understanding component for a\ndiverse range of downstream tasks.Curriculum learning is a method that employs\na structured training regime instead, which has been leveraged in computer\nvision and machine translation to improve model training speed and model\nperformance. While language models have proven transformational for the natural\nlanguage processing community, these models have proven expensive,\nenergy-intensive, and challenging to train. In this work, we explore the effect\nof curriculum learning on language model pretraining using various\nlinguistically motivated curricula and evaluate transfer performance on the\nGLUE Benchmark. Despite a broad variety of training methodologies and\nexperiments we do not find compelling evidence that curriculum learning methods\nimprove language model training.",
+    "pdf_url": "http://arxiv.org/pdf/2108.02170v1",
+    "published": "2021-08-04"
+  },
+  "2202.03371v1": {
+    "title": "Cedille: A large autoregressive French language model",
+    "authors": [
+      "Martin M\u00fcller",
+      "Florian Laurent"
+    ],
+    "summary": "Scaling up the size and training of autoregressive language models has\nenabled novel ways of solving Natural Language Processing tasks using zero-shot\nand few-shot learning. While extreme-scale language models such as GPT-3 offer\nmultilingual capabilities, zero-shot learning for languages other than English\nremain largely unexplored. Here, we introduce Cedille, a large open source\nauto-regressive language model, specifically trained for the French language.\nOur results show that Cedille outperforms existing French language models and\nis competitive with GPT-3 on a range of French zero-shot benchmarks.\nFurthermore, we provide an in-depth comparison of the toxicity exhibited by\nthese models, showing that Cedille marks an improvement in language model\nsafety thanks to dataset filtering.",
+    "pdf_url": "http://arxiv.org/pdf/2202.03371v1",
+    "published": "2022-02-07"
+  }
+}

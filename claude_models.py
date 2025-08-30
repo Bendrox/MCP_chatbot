@@ -7,12 +7,29 @@ load_dotenv()
 from typing import Any, Dict, List, Optional
 
 
-MODEL_NAME = "claude-sonnet-4-20250514"  # remplace par l’ID exact que tu utilises
 api_key = os.getenv("ANTHROPIC_API_KEY")
 
-
-class ClaudeSonnet:
-    def __init__(self, model: str = MODEL_NAME):
+class Claude35:
+    """
+    Model version : claude-3-5-haiku-20241022
+    """
+    def __init__(self):
+        self.client = anthropic.Anthropic(api_key=api_key)
+        self.model= "claude-3-5-haiku-20241022"
+    
+    def generate(self, prompt: str, max_tokens: int = 256) -> str:
+        msg = self.client.messages.create(
+            model=self.model,
+            max_tokens=max_tokens,
+            messages=[{"role":"user", "content":prompt }]
+        )
+        return msg.content[0].text
+    
+class Claude4:
+    """
+    Model version : claude-sonnet-4-20250514
+    """
+    def __init__(self, model: str = "claude-sonnet-4-20250514"):
         self.client = anthropic.Anthropic(api_key=api_key)
         self.model = model
 
@@ -35,7 +52,6 @@ class ClaudeSonnet:
             messages=messages,
         )
         return msg
-
     
     def continue_with_history(
         self,
