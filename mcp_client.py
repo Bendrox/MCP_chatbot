@@ -5,7 +5,7 @@ from mcp.client.stdio import stdio_client
 # Necessary classes to etablish co to our MCP server
 # here param to show to client how to lanch server
 server_params = StdioServerParameters(
-    command="python",  # Executable
+    command="python3",  # Executable
     args=["run mcp_research_server.py"],  # Command line arguments
     env=None,  # Optional environment variables
 )
