@@ -164,7 +164,7 @@ class MCP_ChatBot:
         server_params = StdioServerParameters(
             command="python",                      # binaire/commande à exécuter
             args=["mcp_server_research.py"],  # arguments pour lancer votre serveur MCP
-            env=None,                           # variables d'env optionnelles pour le serveur
+            env=None,                           # variables d'env optionnelles pour le serveu
         )
 
         # `stdio_client` ouvre un canal (lecture/écriture) vers le serveur MCP lancé ci-dessus
