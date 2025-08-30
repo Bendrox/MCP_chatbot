@@ -25,6 +25,17 @@ class Claude35:
         )
         return msg.content[0].text
     
+    def generate_with_tools(self, messages: List[Dict], max_tokens: int = 256, tools=None):
+        """
+        Génère une réponse avec support des outils
+        """
+        msg = self.client.messages.create(
+            model=self.model,
+            max_tokens=max_tokens,
+            tools=tools,
+            messages=messages,
+        )
+        return msg
 class Claude4:
     """
     Model version : claude-sonnet-4-20250514

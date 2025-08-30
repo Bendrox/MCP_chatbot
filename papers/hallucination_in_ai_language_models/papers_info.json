@@ -1,0 +1,75 @@
+{
+  "2401.06792v2": {
+    "title": "LightHouse: A Survey of AGI Hallucination",
+    "authors": [
+      "Feng Wang"
+    ],
+    "summary": "With the development of artificial intelligence, large-scale models have\nbecome increasingly intelligent. However, numerous studies indicate that\nhallucinations within these large models are a bottleneck hindering the\ndevelopment of AI research. In the pursuit of achieving strong artificial\nintelligence, a significant volume of research effort is being invested in the\nAGI (Artificial General Intelligence) hallucination research. Previous\nexplorations have been conducted in researching hallucinations within LLMs\n(Large Language Models). As for multimodal AGI, research on hallucinations is\nstill in an early stage. To further the progress of research in the domain of\nhallucinatory phenomena, we present a bird's eye view of hallucinations in AGI,\nsummarizing the current work on AGI hallucinations and proposing some\ndirections for future research.",
+    "pdf_url": "http://arxiv.org/pdf/2401.06792v2",
+    "published": "2024-01-08"
+  },
+  "2504.17550v1": {
+    "title": "HalluLens: LLM Hallucination Benchmark",
+    "authors": [
+      "Yejin Bang",
+      "Ziwei Ji",
+      "Alan Schelten",
+      "Anthony Hartshorn",
+      "Tara Fowler",
+      "Cheng Zhang",
+      "Nicola Cancedda",
+      "Pascale Fung"
+    ],
+    "summary": "Large language models (LLMs) often generate responses that deviate from user\ninput or training data, a phenomenon known as \"hallucination.\" These\nhallucinations undermine user trust and hinder the adoption of generative AI\nsystems. Addressing hallucinations is essential for the advancement of LLMs.\nThis paper introduces a comprehensive hallucination benchmark, incorporating\nboth new extrinsic and existing intrinsic evaluation tasks, built upon clear\ntaxonomy of hallucination. A major challenge in benchmarking hallucinations is\nthe lack of a unified framework due to inconsistent definitions and\ncategorizations. We disentangle LLM hallucination from \"factuality,\" proposing\na clear taxonomy that distinguishes between extrinsic and intrinsic\nhallucinations, to promote consistency and facilitate research. Extrinsic\nhallucinations, where the generated content is not consistent with the training\ndata, are increasingly important as LLMs evolve. Our benchmark includes dynamic\ntest set generation to mitigate data leakage and ensure robustness against such\nleakage. We also analyze existing benchmarks, highlighting their limitations\nand saturation. The work aims to: (1) establish a clear taxonomy of\nhallucinations, (2) introduce new extrinsic hallucination tasks, with data that\ncan be dynamically regenerated to prevent saturation by leakage, (3) provide a\ncomprehensive analysis of existing benchmarks, distinguishing them from\nfactuality evaluations.",
+    "pdf_url": "http://arxiv.org/pdf/2504.17550v1",
+    "published": "2025-04-24"
+  },
+  "2404.14233v2": {
+    "title": "Detecting and Mitigating Hallucination in Large Vision Language Models via Fine-Grained AI Feedback",
+    "authors": [
+      "Wenyi Xiao",
+      "Ziwei Huang",
+      "Leilei Gan",
+      "Wanggui He",
+      "Haoyuan Li",
+      "Zhelun Yu",
+      "Fangxun Shu",
+      "Hao Jiang",
+      "Linchao Zhu"
+    ],
+    "summary": "The rapidly developing Large Vision Language Models (LVLMs) have shown\nnotable capabilities on a range of multi-modal tasks, but still face the\nhallucination phenomena where the generated texts do not align with the given\ncontexts, significantly restricting the usages of LVLMs. Most previous work\ndetects and mitigates hallucination at the coarse-grained level or requires\nexpensive annotation (e.g., labeling by proprietary models or human experts).\nTo address these issues, we propose detecting and mitigating hallucinations in\nLVLMs via fine-grained AI feedback. The basic idea is that we generate a\nsmall-size sentence-level hallucination annotation dataset by proprietary\nmodels, whereby we train a hallucination detection model which can perform\nsentence-level hallucination detection, covering primary hallucination types\n(i.e., object, attribute, and relationship). Then, we propose a\ndetect-then-rewrite pipeline to automatically construct preference dataset for\ntraining hallucination mitigating model. Furthermore, we propose\ndifferentiating the severity of hallucinations, and introducing a Hallucination\nSeverity-Aware Direct Preference Optimization (HSA-DPO) for mitigating\nhallucination in LVLMs by incorporating the severity of hallucinations into\npreference learning. Extensive experiments demonstrate the effectiveness of our\nmethod.",
+    "pdf_url": "http://arxiv.org/pdf/2404.14233v2",
+    "published": "2024-04-22"
+  },
+  "2402.00253v2": {
+    "title": "A Survey on Hallucination in Large Vision-Language Models",
+    "authors": [
+      "Hanchao Liu",
+      "Wenyuan Xue",
+      "Yifei Chen",
+      "Dapeng Chen",
+      "Xiutian Zhao",
+      "Ke Wang",
+      "Liping Hou",
+      "Rongjun Li",
+      "Wei Peng"
+    ],
+    "summary": "Recent development of Large Vision-Language Models (LVLMs) has attracted\ngrowing attention within the AI landscape for its practical implementation\npotential. However, ``hallucination'', or more specifically, the misalignment\nbetween factual visual content and corresponding textual generation, poses a\nsignificant challenge of utilizing LVLMs. In this comprehensive survey, we\ndissect LVLM-related hallucinations in an attempt to establish an overview and\nfacilitate future mitigation. Our scrutiny starts with a clarification of the\nconcept of hallucinations in LVLMs, presenting a variety of hallucination\nsymptoms and highlighting the unique challenges inherent in LVLM\nhallucinations. Subsequently, we outline the benchmarks and methodologies\ntailored specifically for evaluating hallucinations unique to LVLMs.\nAdditionally, we delve into an investigation of the root causes of these\nhallucinations, encompassing insights from the training data and model\ncomponents. We also critically review existing methods for mitigating\nhallucinations. The open questions and future directions pertaining to\nhallucinations within LVLMs are discussed to conclude this survey.",
+    "pdf_url": "http://arxiv.org/pdf/2402.00253v2",
+    "published": "2024-02-01"
+  },
+  "2407.09417v2": {
+    "title": "Mitigating Entity-Level Hallucination in Large Language Models",
+    "authors": [
+      "Weihang Su",
+      "Yichen Tang",
+      "Qingyao Ai",
+      "Changyue Wang",
+      "Zhijing Wu",
+      "Yiqun Liu"
+    ],
+    "summary": "The emergence of Large Language Models (LLMs) has revolutionized how users\naccess information, shifting from traditional search engines to direct\nquestion-and-answer interactions with LLMs. However, the widespread adoption of\nLLMs has revealed a significant challenge known as hallucination, wherein LLMs\ngenerate coherent yet factually inaccurate responses. This hallucination\nphenomenon has led to users' distrust in information retrieval systems based on\nLLMs. To tackle this challenge, this paper proposes Dynamic Retrieval\nAugmentation based on hallucination Detection (DRAD) as a novel method to\ndetect and mitigate hallucinations in LLMs. DRAD improves upon traditional\nretrieval augmentation by dynamically adapting the retrieval process based on\nreal-time hallucination detection. It features two main components: Real-time\nHallucination Detection (RHD) for identifying potential hallucinations without\nexternal models, and Self-correction based on External Knowledge (SEK) for\ncorrecting these errors using external knowledge. Experiment results show that\nDRAD demonstrates superior performance in both detecting and mitigating\nhallucinations in LLMs. All of our code and data are open-sourced at\nhttps://github.com/oneal2000/EntityHallucination.",
+    "pdf_url": "http://arxiv.org/pdf/2407.09417v2",
+    "published": "2024-07-12"
+  }
+}
