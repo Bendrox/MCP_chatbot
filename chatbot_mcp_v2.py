@@ -29,9 +29,9 @@ load_dotenv()
 Claude35= Claude35()
 
 class MCP_ChatBot:
-    """Un petit client de chat connecté à un serveur MCP.
+    """Un petit client de chat connecté à un serveur MCP
 
-    Rôles principaux :
+    Rôles :
     - Maintenir une session MCP (`self.session`) pour l'appel des tools.
     - Disposer d'un client Anthropic (`self.anthropic`) pour générer les réponses.
     - Exposer au modèle la liste des tools disponibles (`self.available_tools`).
