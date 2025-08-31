@@ -12,12 +12,12 @@
             
             "research": {
                 "command": "python3",
-                "args": ["run", "mcp_server_research.py"]
+                "args": ["mcp_server_research.py"]
             },
             
             "fetch": {
                 "command": "python3",
-                "args": ["mcp-server-fetch"]
+                "args": ["-m", "mcp_server_fetch"] 
             }
         }
 }

@@ -183,6 +183,7 @@ class MCP_ChatBot:
                 # On démarre la boucle d'IO utilisateur
                 await self.chat_loop()
 
+print(f"Used model : {Claude35.model}")
 
 async def main():
     chatbot = MCP_ChatBot()

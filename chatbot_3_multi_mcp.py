@@ -38,7 +38,7 @@ import asyncio
 
 from claude_models import Claude4, Claude35
 
-load_dotenv()
+#load_dotenv()
 
 claude_model_35 = Claude35()
 
@@ -54,7 +54,7 @@ class MCP_ChatBot:
 
     def __init__(self):
         # Initialize session and client objects
-        self.sessions: List[ClientSession] = [] # new
+        self.sessions: List[ClientSession] = [] # new 
         self.exit_stack = AsyncExitStack() # new
         self.anthropic = Anthropic()
         self.available_tools: List[ToolDefinition] = [] # new
@@ -140,10 +140,9 @@ class MCP_ChatBot:
                                           }
                                       ]
                                     })
-                    response = self.anthropic.messages.create(max_tokens = 2024,
-                                      model = 'claude-3-7-sonnet-20250219', 
-                                      tools = self.available_tools,
-                                      messages = messages) 
+                    response = claude_model_35.generate_with_tools(messages = messages,
+                                                       max_tokens= max_tokens_param,
+                                                       tools = self.available_tools)
                     
                     if(len(response.content) == 1 and response.content[0].type == "text"):
                         print(response.content[0].text)
@@ -185,6 +184,7 @@ async def main():
     finally:
         await chatbot.cleanup() #new! 
 
+print(f"Used model : {claude_model_35.model}")
 
 if __name__ == "__main__":
     asyncio.run(main())

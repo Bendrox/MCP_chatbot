@@ -163,5 +163,7 @@ def chat_loop():
         except Exception as e:
             print(f"\nError: {e}")
 
+print(f"Used model : {claude_client.model}")
+
 if __name__ == "__main__":
     chat_loop() #chat mode 
