@@ -43,7 +43,7 @@ from llm.claude_models import Claude4, Claude35
 claude_model_35 = Claude35()
 
 # params
-max_tokens_param= 350
+max_tokens_param= 600
 
 class ToolDefinition(TypedDict):
     name: str

@@ -18,6 +18,12 @@
             "fetch": {
                 "command": "python3",
                 "args": ["-m", "mcp_server_fetch"] 
+            },
+            
+            "git":{
+                "command": "python3",
+                "args": ["-m", "mcp_server_git"]
             }
+
         }
 }
