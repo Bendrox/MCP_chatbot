@@ -1,17 +1,16 @@
 """
-MCP ChatBot — version annotée 
+MCP ChatBot 
 
-Ce script connecte un modèle Anthropic (Claude) à un serveur MCP 
-via un transport STDIO. 
-Le modèle peut appeler les "tools" (outils) exposés par le serveur
-MCP, et le script gère automatiquement les allers-retours :
+Ce script connecte un modèle Anthropic (Claude) à un serveur MCP via un transport STDIO. 
+Le modèle peut appeler les "tools" (outils) exposés par le serveur MCP, 
+et le script gère automatiquement les allers-retours :
 
 - l'utilisateur écrit une question,
 - le modèle répond soit en texte, soit en demandant d'utiliser un outil (tool_use),
-- le client appelle l'outil via la session MCP et renvoie le résultat au modèle,
-- on boucle jusqu'à ce que le modèle rende une réponse finale en texte.
+- le client appelle l'outil via  session MCP et renvoie le résultat au modèle,
+-  boucle jusqu'à ce que le modèle rende une réponse finale en texte.
 
-`nest_asyncio.apply()` permet d'éviter les erreurs liées à la boucle asyncio déjà en cours.
+La v2 a une meilleure intégration des modèles d'Antropic dans le code avec une dép vers claude_models.py
 """
 
 from dotenv import load_dotenv
@@ -20,13 +19,14 @@ from mcp import ClientSession, StdioServerParameters, types
 from mcp.client.stdio import stdio_client
 from typing import List
 import asyncio
-import nest_asyncio
 
-# Permet de ré-entrer dans la boucle asyncio (utile en notebook/Jupyter)
-nest_asyncio.apply()
+
+from claude_models import Claude4, Claude35
 
 load_dotenv()
 
+## Initiate language model: 
+Claude35= Claude35()
 
 class MCP_ChatBot:
     """Un petit client de chat connecté à un serveur MCP.
@@ -40,16 +40,13 @@ class MCP_ChatBot:
     def __init__(self):
         # Session MCP (initialisée plus tard dans `connect_to_server_and_run`)
         self.session: ClientSession = None
-        # Client Anthropic (lit la clé API depuis les variables d'environnement)
-        self.anthropic = Anthropic()
         # Liste des outils au format attendu par Anthropic (nom, description, schéma d'entrée)
         self.available_tools: List[dict] = []
 
     async def process_query(self, query):
         """Traite une requête utilisateur de bout en bout.
-
         Étapes :
-        1) Envoie la question de l'utilisateur au modèle.
+        1) Envoie la question au modèle
         2) Si le modèle répond par du texte, on l'affiche. Si la réponse est finale, on s'arrête.
         3) Si le modèle demande d'utiliser un outil (tool_use), on l'appelle via MCP,
            puis on renvoie au modèle le résultat (`tool_result`) pour qu'il continue.
@@ -59,12 +56,9 @@ class MCP_ChatBot:
         messages = [{'role': 'user', 'content': query}]
 
         # Premier appel au modèle
-        response = self.anthropic.messages.create(
-            max_tokens=2024,
-            model='claude-3-7-sonnet-20250219',
-            tools=self.available_tools,  # outils que le modèle est autorisé à utiliser
-            messages=messages,
-        )
+        response= Claude35.generate_with_tools(messages=messages,
+                                     max_tokens=2000,
+                                     tools=self.available_tools)
 
         # Drapeau de boucle (NB: le nom ombre la méthode, mais reste local)
         process_query = True
@@ -117,12 +111,9 @@ class MCP_ChatBot:
                     })
 
                     # Nouveau tour : on redemande au modèle quoi faire maintenant qu'il a le résultat
-                    response = self.anthropic.messages.create(
-                        max_tokens=2024,
-                        model='claude-3-7-sonnet-20250219',
-                        tools=self.available_tools,
-                        messages=messages,
-                    )
+                    response= Claude35.generate_with_tools(messages=messages,
+                                     max_tokens=2000,
+                                     tools=self.available_tools)
 
                     # Si cette nouvelle réponse est un unique texte, on l'affiche et on termine
                     if len(response.content) == 1 and response.content[0].type == "text":
@@ -164,7 +155,7 @@ class MCP_ChatBot:
         server_params = StdioServerParameters(
             command="python",                      # binaire/commande à exécuter
             args=["mcp_server_research.py"],  # arguments pour lancer votre serveur MCP
-            env=None,                           # variables d'env optionnelles pour le serveu
+            env=None,                           # variables d'env optionnelles pour le serveur
         )
 
         # `stdio_client` ouvre un canal (lecture/écriture) vers le serveur MCP lancé ci-dessus
@@ -194,11 +185,9 @@ class MCP_ChatBot:
 
 
 async def main():
-    """Point d'entrée asynchrone du script."""
     chatbot = MCP_ChatBot()
     await chatbot.connect_to_server_and_run()
 
 
 if __name__ == "__main__":
-    # Lance la boucle asyncio et exécute `main()`
     asyncio.run(main())
