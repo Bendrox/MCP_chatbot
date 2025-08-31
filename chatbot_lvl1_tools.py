@@ -4,15 +4,15 @@ load_dotenv()
 import json 
 
 # Internal Importing
-from claude_sonnet import ClaudeSonnet
-from arxiv_tools_functions import search_papers, extract_info
+from llm.claude_models import Claude35
+from arxiv_tools_4_chatbot import search_papers, extract_info
 
 ## Setting
 PAPER_DIR = "papers" # local directory name for retreived data
 max_token_fix= 200
 
 # Init claude language model 
-claude_client = ClaudeSonnet() 
+claude_client = Claude35() 
 
 ## Setting tools & mapping
 tools = [

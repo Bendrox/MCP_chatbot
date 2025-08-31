@@ -12,7 +12,7 @@
             
             "research": {
                 "command": "python3",
-                "args": ["mcp_server_research.py"]
+                "args": ["local_mcp_servers/mcp_server_research.py"]
             },
             
             "fetch": {
