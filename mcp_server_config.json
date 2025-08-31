@@ -11,12 +11,12 @@
             },
             
             "research": {
-                "command": "uv",
-                "args": ["run", "research_server.py"]
+                "command": "python3",
+                "args": ["run", "mcp_server_research.py"]
             },
             
             "fetch": {
-                "command": "uvx",
+                "command": "python3",
                 "args": ["mcp-server-fetch"]
             }
         }

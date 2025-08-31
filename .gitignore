@@ -1,1 +1,4 @@
 .env
+mcp_template/
+__pycache__/
+mcp_env_v2/
