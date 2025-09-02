@@ -28,7 +28,7 @@ class OpenAI_5_nano():
         """
         Génère une réponse avec support des outils
         """
-        msg = self.client.messages.create(
+        msg = self.client.responses.create(
             model=self.model,
             max_tokens=max_tokens,
             tools=tools,
