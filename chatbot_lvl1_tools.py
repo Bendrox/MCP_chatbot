@@ -12,7 +12,7 @@ PAPER_DIR = "papers" # local directory name for retreived data
 max_token_fix= 200
 
 # Init claude language model 
-claude_client = Claude35() 
+llm = Claude35() 
 
 ## Setting tools & mapping
 tools = [
@@ -93,7 +93,7 @@ def process_query(query):
     
     # 1.2 Premier appel au modèle : il peut répondre en texte
     #     OU demander d'utiliser un outil (tool_use)
-    response = claude_client.generate_with_tools(messages,100,tools)
+    response = llm.generate_with_tools(messages,100,tools)
     keep_looping = True
     
     # Étape 4 — BOUCLE JUSQU’À LA RÉPONSE FINALE
@@ -144,7 +144,7 @@ def process_query(query):
 
                 # 3.5 Relancer le modèle avec l'historique mis à jour
                 #response = client.messages.create # a remplacer 
-                response = claude_client.continue_with_history(messages, 
+                response = llm.continue_with_history(messages, 
                                                               max_tokens= max_token_fix, 
                                                               tools=tools)
 
@@ -163,7 +163,7 @@ def chat_loop():
         except Exception as e:
             print(f"\nError: {e}")
 
-print(f"Used model : {claude_client.model}")
+print(f"Used model : {llm.model}")
 
 if __name__ == "__main__":
     chat_loop() #chat mode 

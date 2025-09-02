@@ -21,12 +21,12 @@ from typing import List
 import asyncio
 
 
-from claude_models import Claude4, Claude35
+from llm.claude_models import Claude4, Claude35
 
 load_dotenv()
 
 ## Initiate language model: 
-Claude35= Claude35()
+llm= Claude35()
 
 class MCP_ChatBot:
     """Un petit client de chat connecté à un serveur MCP
@@ -56,7 +56,7 @@ class MCP_ChatBot:
         messages = [{'role': 'user', 'content': query}]
 
         # Premier appel au modèle
-        response= Claude35.generate_with_tools(messages=messages,
+        response= llm.generate_with_tools(messages=messages,
                                      max_tokens=2000,
                                      tools=self.available_tools)
 
@@ -96,7 +96,13 @@ class MCP_ChatBot:
 
                     # Appel réel de l'outil via la session MCP (transport stdio)
                     # Le résultat renvoyé par MCP (généralement un contenu structuré)
-                    result = await self.session.call_tool(tool_name, arguments=tool_args)
+                    # result = await self.session.call_tool(tool_name, arguments=tool_args) depreciated remplac by 101-104
+                    
+                    try:
+                        result = await self.session.call_tool(tool_name, arguments=tool_args)
+                    except Exception as e:
+                            result = types.CallToolResult(content=[types.TextContent(type="text", text=f"Tool failed: {str(e)}")])
+                    
 
                     # On transmet au modèle le résultat de l'outil, en l'emballant comme `tool_result`
                     messages.append({
@@ -111,7 +117,7 @@ class MCP_ChatBot:
                     })
 
                     # Nouveau tour : on redemande au modèle quoi faire maintenant qu'il a le résultat
-                    response= Claude35.generate_with_tools(messages=messages,
+                    response= llm.generate_with_tools(messages=messages,
                                      max_tokens=2000,
                                      tools=self.available_tools)
 
@@ -183,7 +189,7 @@ class MCP_ChatBot:
                 # On démarre la boucle d'IO utilisateur
                 await self.chat_loop()
 
-print(f"Used model : {Claude35.model}")
+print(f"Used model : {llm.model}")
 
 async def main():
     chatbot = MCP_ChatBot()

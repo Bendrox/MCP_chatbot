@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from claude_models import ClaudeSonnet
+from llm.claude_models import Claude4
 
-model = ClaudeSonnet()
+model = Claude4()
 reponse = model.generate('Test', 20)
 print(reponse)

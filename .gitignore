@@ -1,4 +1,4 @@
 .env
-mcp_template/
+temp/
 __pycache__/
 mcp_env_v2/

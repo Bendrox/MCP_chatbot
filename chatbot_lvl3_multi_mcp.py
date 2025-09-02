@@ -40,7 +40,7 @@ from llm.claude_models import Claude4, Claude35
 
 #load_dotenv()
 
-claude_model_35 = Claude35()
+llm = Claude35()
 
 # params
 max_tokens_param= 600
@@ -106,7 +106,7 @@ class MCP_ChatBot:
     
     async def process_query(self, query):
         messages = [{'role':'user', 'content':query}]
-        response = claude_model_35.generate_with_tools(messages = messages,
+        response = llm.generate_with_tools(messages = messages,
                                                        max_tokens= max_tokens_param,
                                                        tools = self.available_tools)
         process_query = True
@@ -130,7 +130,12 @@ class MCP_ChatBot:
                     
                     # Call a tool
                     session = self.tool_to_session[tool_name] # new
-                    result = await session.call_tool(tool_name, arguments=tool_args)
+                    
+                    try:
+                        result = await session.call_tool(tool_name, arguments=tool_args)
+                    except Exception as e:
+                            result = types.CallToolResult(content=[types.TextContent(type="text", text=f"Tool failed: {str(e)}")])
+                    
                     messages.append({"role": "user", 
                                       "content": [
                                           {
@@ -140,7 +145,7 @@ class MCP_ChatBot:
                                           }
                                       ]
                                     })
-                    response = claude_model_35.generate_with_tools(messages = messages,
+                    response = llm.generate_with_tools(messages = messages,
                                                        max_tokens= max_tokens_param,
                                                        tools = self.available_tools)
                     
@@ -184,7 +189,7 @@ async def main():
     finally:
         await chatbot.cleanup() #new! 
 
-print(f"Used model : {claude_model_35.model}")
+print(f"Used model : {llm.model}")
 
 if __name__ == "__main__":
     asyncio.run(main())
