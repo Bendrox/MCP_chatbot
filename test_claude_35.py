@@ -6,4 +6,5 @@ from llm.claude_models import Claude35
 
 model = Claude35()
 reponse = model.generate('Test', 20)
+print(f"Model version used: {reponse.model}" )
 print(reponse)

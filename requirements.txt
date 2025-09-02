@@ -42,6 +42,7 @@ mcp==1.13.1
 mcp-server-fetch==2025.4.7
 mcp-server-git==2025.7.1
 nest-asyncio==1.6.0
+openai==1.104.0
 packaging==25.0
 parso==0.8.5
 pexpect==4.9.0
@@ -73,6 +74,7 @@ sse-starlette==3.0.2
 stack-data==0.6.3
 starlette==0.47.3
 tornado==6.5.2
+tqdm==4.67.1
 traitlets==5.14.3
 typing-inspection==0.4.1
 typing_extensions==4.15.0

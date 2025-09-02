@@ -17,9 +17,9 @@ class OpenAI_5_nano():
         self.model= "gpt-5-nano-2025-08-07"
     
     def generate(self, prompt: str, max_tokens: int = 256) -> str:
-        msg = self.client.messages.create(
+        msg = self.client.responses.create(
             model=self.model,
-            max_tokens=max_tokens,
+            max_output_tokens=max_tokens,
             messages=[{"role":"user", "content":prompt }]
         )
         return msg.content[0].text
@@ -30,7 +30,7 @@ class OpenAI_5_nano():
         """
         msg = self.client.responses.create(
             model=self.model,
-            max_tokens=max_tokens,
+            max_output_tokens=max_tokens,
             tools=tools,
             messages=messages,
         )

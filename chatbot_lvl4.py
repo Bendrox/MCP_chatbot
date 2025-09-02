@@ -1,8 +1,8 @@
-# "Method not found"
-# Le problème principal vient du fait que certains serveurs MCP ne supportent pas toutes les méthodes 
-# (prompts, resources). J'ai ajouté des try-except spécifiques pour chaque type de liste :
+# "Method not found": du fait que certains serveurs MCP ne supportent pas toutes les méthodes 
+# (prompts, resources)
+# => solution J'ai ajouté des try-except spécifiques pour chaque type de liste :
 
-# La  v4 intégre la gestion des ressources et des prompts
+#  v4 intégre la gestion des ressources et des prompts
 
 from dotenv import load_dotenv
 from anthropic import Anthropic
@@ -116,6 +116,8 @@ class MCP_ChatBot:
                         break
                         
                     result = await session.call_tool(content.name, arguments=content.input)
+                    
+                    
                     messages.append({
                         "role": "user", 
                         "content": [
