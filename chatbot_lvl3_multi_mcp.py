@@ -1,4 +1,4 @@
-# New version v3 adding multi client + servers (internal + external): 
+# New version v3 adding multi client + external servers (internal + external like github + filesystem ): 
 
 # 1 - Instead of having one session, you now have a list of client sessions where each client session establishes a 1-to-1
 # connection to each server;
