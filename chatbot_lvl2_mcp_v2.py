@@ -14,7 +14,6 @@ La v2 a une meilleure intégration des modèles d'Antropic dans le code avec une
 """
 
 from dotenv import load_dotenv
-from anthropic import Anthropic
 from mcp import ClientSession, StdioServerParameters, types
 from mcp.client.stdio import stdio_client
 from typing import List
@@ -160,7 +159,7 @@ class MCP_ChatBot:
         # Paramètres pour démarrer/joindre un serveur MCP via STDIO
         server_params = StdioServerParameters(
             command="python",                      # binaire/commande à exécuter
-            args=["mcp_server_research.py"],  # arguments pour lancer votre serveur MCP
+            args=["/Users/oussa/Desktop/Github_perso/chatbot_mcp/local_mcp_servers/mcp_server_research.py"],  # arguments pour lancer votre serveur MCP
             env=None,                           # variables d'env optionnelles pour le serveur
         )
 
