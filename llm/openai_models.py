@@ -16,15 +16,15 @@ class OpenAI_5_nano():
         self.client = OpenAI()
         self.model= "gpt-5-nano-2025-08-07"
     
-    def generate(self, prompt: str, max_tokens: int = 256) -> str:
+    def generate(self, prompt: str, max_tokens: int = 900) -> str:
         msg = self.client.responses.create(
             model=self.model,
             max_output_tokens=max_tokens,
-            messages=[{"role":"user", "content":prompt }]
+            input=[{"role":"user", "content":prompt }]
         )
-        return msg.content[0].text
+        return msg.output[1].content[0].text
     
-    def generate_with_tools(self, messages: List[Dict], max_tokens: int = 256, tools=None):
+    def generate_with_tools(self, messages: List[Dict], max_tokens: int = 900, tools=None):
         """
         Génère une réponse avec support des outils
         """
@@ -32,7 +32,7 @@ class OpenAI_5_nano():
             model=self.model,
             max_output_tokens=max_tokens,
             tools=tools,
-            messages=messages,
+            input=messages,
         )
-        return msg
+        return msg.output[1].content[0].text
 
