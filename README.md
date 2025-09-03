@@ -6,7 +6,7 @@ MCP Chatbot is an advanced, multi-level chatbot designed for academic research a
 
 ## 📚 Key Features
 
-- **Multi-Level Architecture**: 
+- **Multi-Level Chatbots**: 
   - `chatbot_lvl1_tools.py`: Basic Chatbot functionality with tools (arxiv)
   - `chatbot_lvl2_mcp_v2.py`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
   - `chatbot_lvl3_multi_mcp.py`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
