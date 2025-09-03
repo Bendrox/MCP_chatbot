@@ -7,11 +7,13 @@ MCP Chatbot is an advanced, multi-level chatbot designed for academic research a
 ## 📚 Key Features
 
 - **Multi-Level Architecture**: 
-  - `chatbot_lvl1_tools.py`: Basic chatbot functionality
-  - `chatbot_lvl2_mcp_v2.py`: Enhanced interaction capabilities
-  - `chatbot_lvl3_multi_mcp.py`: Advanced multi-model processing
+  - `chatbot_lvl1_tools.py`: Basic Chatbot functionality with tools (arxiv)
+  - `chatbot_lvl2_mcp_v2.py`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
+  - `chatbot_lvl3_multi_mcp.py`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
+  - `chatbot_lvl4.py`: Advanced Chatbot multi-model processing with external MCP servers (adding prompts & resources)
 
-- **ArXiv Integration**:
+- **MCP servers Integration**:
+
   - `arxiv_tools_4_chatbot.py`: Seamless research paper retrieval and analysis
   - Search and extract information from academic repositories
   - Support for in-depth paper exploration
@@ -56,8 +58,10 @@ print(response)
 
 ## 🌟 Components
 
-- **Level 1 Tools**: Basic chatbot functionalities
-- **Level 2 MCP**: Enhanced interaction model
-- **Level 3 Multi-MCP**: Advanced multi-model processing
+- **Chatbot Level 1 Tools**: Basic chatbot functionalities
+- **Chatbot Level 2 MCP**: Enhanced interaction model
+- **Chatbot Level 3 Multi-MCP**: Advanced multi-model processing
 - **ArXiv Tools**: Research paper retrieval and analysis
 
+
+Author : the Chatbot it self :)
