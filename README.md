@@ -14,9 +14,11 @@ MCP Chatbot is an advanced, multi-level chatbot designed for academic research a
 
 - **MCP servers Integration**:
 
-  - `arxiv_tools_4_chatbot.py`: Seamless research paper retrieval and analysis
-  - Search and extract information from academic repositories
-  - Support for in-depth paper exploration
+  - Arxiv in `arxiv_tools_4_chatbot.py`: Seamless research paper retrieval and analysis, to Search and extract information from academic repositories, Support for in-depth paper exploration
+  - filesystem : Secure file operations with configurable access controls
+  - Github : Tools to read, search, and manipulate Git repositories
+  - Prompts: Search for papers, extract and organize the information then Provide a comprehensive summary
+  - Resources: give access to "papers://folders" (papers retreived from Arxiv )
 
 ## 🚀 Getting Started
 
