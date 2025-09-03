@@ -36,3 +36,31 @@ class OpenAI_5_nano():
         )
         return msg.output[1].content[0].text
 
+
+class OpenAI_5_mini():
+    """
+    Model version : 'gpt-5-mini-2025-08-07'
+    """
+    def __init__(self):
+        self.client = OpenAI()
+        self.model= "gpt-5-mini-2025-08-07"
+    
+    def generate(self, prompt: str, max_tokens: int = 900) -> str:
+        msg = self.client.responses.create(
+            model=self.model,
+            max_output_tokens=max_tokens,
+            input=[{"role":"user", "content":prompt }]
+        )
+        return msg.output[1].content[0].text
+    
+    def generate_with_tools(self, messages: List[Dict], max_tokens: int = 900, tools=None):
+        """
+        Génère une réponse avec support des outils
+        """
+        msg = self.client.responses.create(
+            model=self.model,
+            max_output_tokens=max_tokens,
+            tools=tools,
+            input=messages,
+        )
+        return msg.output[1].content[0].text
