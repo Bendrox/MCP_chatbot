@@ -3,7 +3,7 @@ import json
 import os
 from typing import List
 
-PAPER_DIR = "papers"
+PAPER_DIR = "retreived_arxiv_papers"
 
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
     """

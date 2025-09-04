@@ -15,4 +15,5 @@ def test_claude(model_choose):
     """
     model=model_choose()
     reponse = model.generate('Test', 10)
+    if reponse=str
     

@@ -5,7 +5,7 @@ import json
 
 # Internal Importing
 from llm.claude_models import Claude35
-from arxiv_tools_4_chatbot import search_papers, extract_info
+from chatbot_lvl1_tools.arxiv_tools_4_chatbot import search_papers, extract_info
 
 ## Setting
 PAPER_DIR = "papers" # local directory name for retreived data

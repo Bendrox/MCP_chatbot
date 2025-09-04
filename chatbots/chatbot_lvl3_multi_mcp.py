@@ -43,7 +43,7 @@ from llm.openai_models import OpenAI_5_mini, OpenAI_5_nano
 llm = Claude35()
 #llm = Claude4()
 # params
-max_tokens_param= 5000
+max_tokens_param= 500
 
 class ToolDefinition(TypedDict):
     name: str
