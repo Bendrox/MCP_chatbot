@@ -1,4 +1,5 @@
 .env
 temp/
+.DS_Store
 __pycache__/
 mcp_env_v2/

@@ -81,27 +81,13 @@ class MCP_ChatBot:
             print(f"\nConnected to {server_name} with tools:", [t.name for t in tools])
 
 
-            for tool in tools:
-                self.tool_to_session[tool.name] = session
-                # si tu es sur un modèle OpenAI (ex: OpenAI_5_mini / OpenAI_5_nano)
-                if isinstance(llm, OpenAI_5_mini) or isinstance(llm, OpenAI_5_nano):
-                    self.available_tools.append(to_openai_function_tool(tool))
-                else:
-                    # conserve le format Anthropic pour Claude
-                    self.available_tools.append({
-                        "name": tool.name,
-                        "description": tool.description,
-                        "input_schema": tool.inputSchema
-                    })
-                    
-            # Acienne version spécifique aux modelès claud anthropic
-            # for tool in tools: # new
-            #     self.tool_to_session[tool.name] = session
-            #     self.available_tools.append({
-            #         "name": tool.name,
-            #         "description": tool.description,
-            #         "input_schema": tool.inputSchema
-            #     })
+            for tool in tools: # new
+             self.tool_to_session[tool.name] = session
+             self.available_tools.append({
+              "name": tool.name,
+              "description": tool.description,
+              "input_schema": tool.inputSchema
+                })
                 
         except Exception as e:
             print(f"Failed to connect to {server_name}: {e}")
