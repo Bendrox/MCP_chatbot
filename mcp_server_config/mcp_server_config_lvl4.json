@@ -10,7 +10,6 @@
                 ]
             },
             
-            
             "research": {
                 "command": "python3",
                 "args": ["local_mcp_servers/mcp_server_research_lvl4.py"]

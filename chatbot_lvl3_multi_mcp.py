@@ -37,13 +37,13 @@ import json
 import asyncio
 
 from llm.claude_models import Claude4, Claude35
+from llm.openai_models import OpenAI_5_mini, OpenAI_5_nano
 
 #load_dotenv()
-
 llm = Claude35()
-
+#llm = Claude4()
 # params
-max_tokens_param= 600
+max_tokens_param= 5000
 
 class ToolDefinition(TypedDict):
     name: str
@@ -79,14 +79,30 @@ class MCP_ChatBot:
             response = await session.list_tools()
             tools = response.tools
             print(f"\nConnected to {server_name} with tools:", [t.name for t in tools])
-            
-            for tool in tools: # new
+
+
+            for tool in tools:
                 self.tool_to_session[tool.name] = session
-                self.available_tools.append({
-                    "name": tool.name,
-                    "description": tool.description,
-                    "input_schema": tool.inputSchema
-                })
+                # si tu es sur un modèle OpenAI (ex: OpenAI_5_mini / OpenAI_5_nano)
+                if isinstance(llm, OpenAI_5_mini) or isinstance(llm, OpenAI_5_nano):
+                    self.available_tools.append(to_openai_function_tool(tool))
+                else:
+                    # conserve le format Anthropic pour Claude
+                    self.available_tools.append({
+                        "name": tool.name,
+                        "description": tool.description,
+                        "input_schema": tool.inputSchema
+                    })
+                    
+            # Acienne version spécifique aux modelès claud anthropic
+            # for tool in tools: # new
+            #     self.tool_to_session[tool.name] = session
+            #     self.available_tools.append({
+            #         "name": tool.name,
+            #         "description": tool.description,
+            #         "input_schema": tool.inputSchema
+            #     })
+                
         except Exception as e:
             print(f"Failed to connect to {server_name}: {e}")
 
@@ -135,7 +151,7 @@ class MCP_ChatBot:
                         result = await session.call_tool(tool_name, arguments=tool_args)
                     except Exception as e:
                             result = types.CallToolResult(content=[types.TextContent(type="text", text=f"Tool failed: {str(e)}")])
-                    
+
                     messages.append({"role": "user", 
                                       "content": [
                                           {

@@ -10,6 +10,7 @@ PAPER_DIR = "papers" # local directory name for retreived data
 # Init mcp server
 mcp = FastMCP("research")
 
+
 @mcp.tool()
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
     """
@@ -98,5 +99,7 @@ def extract_info(paper_id: str) -> str:
     return f"There's no saved information related to paper {paper_id}."
 
 
+def get_clone():
+    return 
 if __name__ == "__main__":
     mcp.run(transport='stdio') #mcp mode 

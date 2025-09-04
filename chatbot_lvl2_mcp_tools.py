@@ -10,7 +10,7 @@ et le script gère automatiquement les allers-retours :
 - le client appelle l'outil via  session MCP et renvoie le résultat au modèle,
 -  boucle jusqu'à ce que le modèle rende une réponse finale en texte.
 
-La v2 a une meilleure intégration des modèles d'Antropic dans le code avec une dép vers claude_models.py
+Cette v2 a meilleure intégration des modèles (import en POO)
 """
 
 from dotenv import load_dotenv
