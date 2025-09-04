@@ -2,11 +2,11 @@
 
 ## 🤖 Project Overview
 
-MCP Chatbot is an advanced, multi-level chatbot designed for academic research and paper exploration. Leveraging sophisticated natural language processing techniques, this project provides intelligent interactions with academic content, particularly focusing on arXiv research papers.
+This Chatbot is an advanced, multi-tool powered by MCP. It got the ability to retreive academic research and paper exploration from arXiv, building analysis, summarizing papers, save the output locally and retreive local files. 
 
-## 📚 Key Features
+## 📚 Key Featuress
 
-- **Multi-Level Chatbots**: 
+- **Four chatbots classified by complexity **: 
   - `chatbot_lvl1_tools.py`: Basic Chatbot functionality with tools to interact with arxiv
   - `chatbot_lvl2_mcp_v2.py`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
   - `chatbot_lvl3_multi_mcp.py`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
@@ -24,7 +24,7 @@ MCP Chatbot is an advanced, multi-level chatbot designed for academic research a
 
 ### Prerequisites
 
-- Python 3.8+
+- Python Python 3.13.2
 - Required libraries (install via pip):
   ```bash
   pip install -r requirements.txt
