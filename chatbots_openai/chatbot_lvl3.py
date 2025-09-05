@@ -28,19 +28,19 @@
 
     
 from dotenv import load_dotenv
-from anthropic import Anthropic
 from mcp import ClientSession, StdioServerParameters, types
 from mcp.client.stdio import stdio_client
 from typing import List, Dict, TypedDict
 from contextlib import AsyncExitStack
 import json
 import asyncio
+from openai import OpenAI
 
-from llm.claude_models import Claude4, Claude35
+from llm.openai_models import OpenAI_5_mini, OpenAI_5_nano
 
 #load_dotenv()
-llm = Claude35()
-#llm = Claude4()
+llm = OpenAI_5_nano()
+#llm = OpenAI_5_mini()
 
 # params
 max_tokens_param= 500
@@ -56,7 +56,7 @@ class MCP_ChatBot:
         # Initialize session and client objects
         self.sessions: List[ClientSession] = [] # new 
         self.exit_stack = AsyncExitStack() # new
-        self.anthropic = Anthropic()
+        self.openai = OpenAI()
         self.available_tools: List[ToolDefinition] = [] # new
         self.tool_to_session: Dict[str, ClientSession] = {} # new
 

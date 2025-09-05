@@ -60,10 +60,15 @@ print(response)
 
 ## 🌟 Components
 
-- **Chatbot Level 1 Tools**: Basic chatbot functionalities
-- **Chatbot Level 2 MCP**: Enhanced interaction model
-- **Chatbot Level 3 Multi-MCP**: Advanced multi-model processing
-- **ArXiv Tools**: Research paper retrieval and analysis
+to do 
+
+## Compatibility 
+
+Important a noter ! 
+-	L’API d’OpenAI peut se connecter à des MCP (Model Context Protocol) servers en tant qu’outils ("type": "mcp") dans les appels responses.create. Mais uniquement avec serveurs distants (HTTP/SSE) sont supportés → server_url.
+-	Pour serveurs locaux (stdio, ex. filesystem, research, git), il faut utiliser le Agents SDK (qui sait lancer les processus avec command / args).
+Travail à faire : 
+•	OpenAI Agents SDK
 
 
 Author : the Chatbot it self :)
