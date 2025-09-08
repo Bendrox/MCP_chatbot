@@ -24,5 +24,3 @@ def convert_timezone(dt: str, from_tz: str, to_tz: str) -> str:
     tgt = src.astimezone(ZoneInfo(to_tz))
     return tgt.isoformat()
 
-if __name__ == "__main__":
-    mcp.run(transport="streamable-http")  # sert par défaut sur /mcp
