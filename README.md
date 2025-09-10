@@ -1,75 +1,157 @@
-# MCP Chatbot: Multi-Level Academic Research Assistant
+# 🤖 MCP Chatbot: Multi‑Level Academic Research Assistant
 
-## 🤖 Project Overview
+## 🧭 Overview
 
-This Chatbot is a multi-tool Chatbot powered OpenAI and Claud (Antropic) and MCP. 
-Depending on the version and the choosen model, it got the ability to retreive academic research and paper  from arXiv, summarizing papers, retreive local files, save the output locally and make some git actions. 
+This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered by OpenAI and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide several assistants and add‑ons that enable:
 
-## 📚 Key versions of the Chatbot
+- Retrieval and analysis of publications (arXiv)
+- Synthesis and organization of scientific content
+- Access to local resources (file system) and remote resources (Git repositories, HTTP fetch)
+- Integration of local and remote MCP servers to extend capabilities (prompts, resources)
+- A homemade MCP server to retrieve data from **LégiFrance**
 
-- **Four chatbots classified by complexity **: 
-  - `chatbot_lvl1`: Basic Chatbot functionality with tools to interact with arxiv
-  - `chatbot_lvl2`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
-  - `chatbot_lvl3`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
-  - `chatbot_lvl4`: Advanced Chatbot multi-model processing with external MCP servers (adding prompts & resources)
+## 🎯 Goal
 
-- **MCP servers Integration**:
+Provide a modular platform for experimenting with specialized search‑based conversational assistants capable of orchestrating multiple models and tools via MCP and automating tasks related to the collection, summarization, and management of legal and scientific content.
 
-  - Arxiv in `arxiv_tools_4_chatbot.py`: Seamless research paper retrieval and analysis, to Search and extract information from academic repositories, Support for in-depth paper exploration
-  - filesystem : Secure file operations with configurable access controls
-  - Github : Tools to read, search, and manipulate Git repositories
-  - Prompts: Search for papers, extract and organize the information then Provide a comprehensive summary
-  - Resources: give access to "papers://folders" (papers retreived from Arxiv )
+## 🧩 Chatbot Levels at a Glance
+
+- **chatbot\_lvl1** — Basic chatbot with local tools to interact with arXiv.
+- **chatbot\_lvl2** — Enhanced chatbot with a single MCP server (arXiv tools via “research”).
+- **chatbot\_lvl3** — Advanced chatbot using multiple MCP servers (filesystem, fetch, Git, research).
+- **chatbot\_lvl4** — Advanced multi‑model chatbot using external MCP servers, plus prompts and local resources.
+
+## 📁 Repository Structure (top‑level)
+
+> Notes: `chatbot_ouputs/` likely meant to be `chatbot_outputs/`. `retreived_arxiv_papers/` likely meant to be `retrieved_arxiv_papers/`.
+
+- `chatbot_lvl1_tools/` — Basic tools for the chatbot (e.g., arXiv interaction).
+- `chatbot_ouputs/` — (probable) directory for storing chatbot outputs.
+- `chatbots/` — Chatbot implementations (different levels/variants) with Claude (Anthropic).
+- `chatbots_openai/` — Specific integrations and agents with OpenAI’s GPT‑5.
+- `llm/` — Wrappers and utilities for LLMs (pre/post‑processing, prompts).
+- `local_mcp_servers/` — Configurations/launchers for local MCP servers (filesystem, research, Git…).
+- `mcp_server_config/` — Configuration files for MCP servers in use.
+- `notebooks/` — Jupyter notebooks for exploration and demos.
+- `retreived_arxiv_papers/` — Collection of papers retrieved for testing/examples.
+- `requirements.txt` — Python dependencies.
+- `docker-compose.yml` + `Dockerfile` — SSE proxy + filesystem MCP server (for OpenAI filesystem).
+
+## 🏗️ Project Architecture
+
+- `lanceur.py` — CLI launcher to run a chatbot version (LvL1 → LvL4)
+- `chatbots/`
+  - `chatbot_lvl1_tools.py` — Local chatbot with Python tools (arXiv)
+  - `chatbot_lvl2_mcp_tools.py` — Chatbot + 1 MCP server (research)
+  - `chatbot_lvl3_multi_mcp.py` — Chatbot with multiple MCP servers (filesystem, fetch, Git, research)
+  - `chatbot_lvl4.py` — As LvL3, with MCP prompts and resources management
+- `chatbots_openai/`
+  - `chatbot_lvl3.py` — LvL3 variant using OpenAI APIs
+- `chatbot_lvl1_tools/`
+  - `arxiv_tools_4_chatbot.py` — Local implementations of arXiv tools
+- `local_mcp_servers/`
+  - `mcp_server_research.py` — MCP “research” server (arXiv tools)
+  - `mcp_server_research_lvl4.py` — Same + resources (`papers://…`) + `generate_search_prompt` prompt
+- `mcp_server_config/`
+  - `mcp_server_config.json` — MCP server config for LvL2/LvL3
+  - `mcp_server_config_lvl4.json` — Config for LvL4 (including resources/prompts)
+- `llm/`
+  - `claude_models.py` — Anthropic wrappers (Claude 3.5/4)
+  - `openai_models.py` — OpenAI wrappers (GPT‑5 / 5‑nano / 5‑mini)
+- `notebooks/`
+  - `explore.ipynb`, `openai_mcp_chat.ipynb` — Demonstrations
+- `chatbot_ouputs/` — Example outputs (MCP summaries)
+
+## 🔌 MCP Servers & Integrations
+
+- **ArXiv** (in `arxiv_tools_4_chatbot.py`): retrieve and analyze research papers; search and extract information from academic repositories; support in‑depth exploration.
+- **Filesystem**: secure file operations with configurable access controls.
+- **GitHub**: tools to read, search, and manipulate Git repositories.
+- **Prompts**: search for papers, extract and organize information, then produce comprehensive summaries.
+- **Resources**: access to `papers://folders` (papers retrieved from arXiv).
+
+### 🧰 Resources & Prompting (LvL4)
+
+- **Resources (from **``**)**
+  - `papers://folders` → list available topics
+  - `papers://{topic}` → details of papers for a topic
+- **Chat commands**
+  - `@folders` → show available folders
+  - `@{topic}` → show papers of a given topic
+  - `/prompts` → list available prompts
+  - `/prompt <name> arg1=val1 …` → execute a prompt, then continue the conversation
+
+## ⚙️ How It Works — by Level
+
+**LvL1 — Local tools (no MCP)**
+
+- Tools: `search_papers(topic, max_results)`, `extract_info(paper_id)`
+- Flow: the LLM selects a tool → the local function runs → results are returned to the model → final answer is generated.
+
+**LvL2 — One MCP server (research)**
+
+- The client starts a local MCP server (arXiv tools) over stdio.
+- The LLM calls tools exposed by the server via MCP.
+
+**LvL3 — Multi‑MCP**
+
+- Connects to multiple servers: filesystem, fetch, Git, research.
+- Maps each tool name to the corresponding server session.
+
+**LvL4 — MCP Prompts & Resources**
+
+- Adds prompt listing/usage and resource listing/usage to the above.
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### 🧰 Prerequisites
 
-- Python Python 3.13.2
-- Required libraries (install via pip):
-  ```bash
-  pip install -r requirements.txt
-  ```
+- Python **3.13.2**
+- Install required libraries:
 
-### Installation
-
-1. Clone the repository
-   ```bash
-   git clone https://github.com/Bendrox/MCP_chatbot.git
-   cd MCP_chatbot
-   ```
-
-2. Install dependencies
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## 🔧 Usage
-
-### Basic Usage
-
-```python
-from chatbot_lvl2_mcp_v2 import MCPChatbot
-
-# Initialize the chatbot
-chatbot = MCPChatbot()
-
-# Start interaction
-response = chatbot.process_query("Tell me about recent AI research")
-print(response)
+```bash
+pip install -r requirements.txt
 ```
 
-## 🌟 Components
+### 🛠️ Installation
 
-to do 
+1. Clone the repository
 
-## Compatibility 
+```bash
+git clone https://github.com/Bendrox/MCP_chatbot.git
+cd MCP_chatbot
+```
 
-Important a noter ! 
--	L’API d’OpenAI peut se connecter à des MCP (Model Context Protocol) servers en tant qu’outils ("type": "mcp") dans les appels responses.create. Mais uniquement avec serveurs distants (HTTP/SSE) sont supportés → server_url.
--	Pour serveurs locaux (stdio, ex. filesystem, research, git), il faut utiliser le Agents SDK (qui sait lancer les processus avec command / args).
-Travail à faire : 
-•	OpenAI Agents SDK
+2. Install dependencies
 
+```bash
+pip install -r requirements.txt
+```
 
-Author : the Chatbot it self :)
+## ▶️ Usage
+
+*In progress*
+
+## 🧱 Components
+
+*In progress*
+
+## 🔗 Compatibility
+
+- The OpenAI API can connect to MCP servers as tools (`"type": "mcp"`) in `responses.create` calls **only for remote servers** (HTTP/SSE) via `server_url`; **stdio is not supported** there.
+- For **local servers (stdio)** such as filesystem, research, Git, use the **Agents SDK**, which can launch processes with `command`/`args`.
+
+## 🗺️ Roadmap / To‑Do
+
+- Enhance code and integrations.
+- Unify output folders (`retreived_arxiv_papers` vs `papers`) or document the mapping.
+- Add automated tests and linting.
+- Provide an initialization script (make/uv/poe) + export examples.
+- Make the MCP config path configurable (`MCP_SERVER_CONFIG` env, CLI flag, or class variable).
+- Adjust OpenAI model names to the versions available at runtime.
+- Explore related topics: OpenAI Agents SDK, Microsoft Learn MCP Server, Azure AI Foundry Agent Service.
+
+## ✍️ Author
+
+OB
+

@@ -1,11 +1,11 @@
-FROM node:20-alpine
+FROM node:20-alpin
 
 # Installe le proxy SSE et le serveur filesystem
 RUN npm i -g mcp-proxy@latest @modelcontextprotocol/server-filesystem@latest
 
 WORKDIR /app
 ENV PORT=8000
-ENV ROOT=/workspace
+ENV ROOT=/workdir_filesystem
 
 EXPOSE 8000
 
