@@ -1,4 +1,4 @@
-# 🤖 MCP Chatbot: Multi‑Level Academic Research Assistant
+# 🤖 MCP Chatbot: Multi‑Level Assistant
 
 ## 🧭 Overview
 
@@ -14,7 +14,7 @@ This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered 
 
 Provide a modular platform for experimenting with specialized search‑based conversational assistants capable of orchestrating multiple models and tools via MCP and automating tasks related to the collection, summarization, and management of legal and scientific content.
 
-## 🧩 Chatbot Levels at a Glance
+## 🧩 Chatbot Levels 
 
 - **chatbot\_lvl1** — Basic chatbot with local tools to interact with arXiv.
 - **chatbot\_lvl2** — Enhanced chatbot with a single MCP server (arXiv tools via “research”).
@@ -22,8 +22,6 @@ Provide a modular platform for experimenting with specialized search‑based con
 - **chatbot\_lvl4** — Advanced multi‑model chatbot using external MCP servers, plus prompts and local resources.
 
 ## 📁 Repository Structure (top‑level)
-
-> Notes: `chatbot_ouputs/` likely meant to be `chatbot_outputs/`. `retreived_arxiv_papers/` likely meant to be `retrieved_arxiv_papers/`.
 
 - `chatbot_lvl1_tools/` — Basic tools for the chatbot (e.g., arXiv interaction).
 - `chatbot_ouputs/` — (probable) directory for storing chatbot outputs.
