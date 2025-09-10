@@ -3,5 +3,5 @@ temp/
 .DS_Store
 __pycache__/
 mcp_env_v2/
-remote_mcp_server.py
+remote_time_mcp_server.py
 remote_legifr_mcp_server.py

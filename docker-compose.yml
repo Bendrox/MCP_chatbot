@@ -1,0 +1,10 @@
+services:
+  mcp-sse:
+    build: .
+    ports:
+      - "8000:8000"              # endpoint SSE: http://localhost:8000/sse
+    environment:
+      - PORT=8000
+      - ROOT=/workspace          # racine vue par le serveur filesystem
+    volumes:
+      - ./workdir:/workspace:rw  # monte TON dossier local

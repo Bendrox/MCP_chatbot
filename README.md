@@ -2,15 +2,16 @@
 
 ## 🤖 Project Overview
 
-This Chatbot is an advanced, multi-tool powered by MCP. It got the ability to retreive academic research and paper exploration from arXiv, building analysis, summarizing papers, save the output locally and retreive local files. 
+This Chatbot is a multi-tool Chatbot powered OpenAI and Claud (Antropic) and MCP. 
+Depending on the version and the choosen model, it got the ability to retreive academic research and paper  from arXiv, summarizing papers, retreive local files, save the output locally and make some git actions. 
 
-## 📚 Key Featuress
+## 📚 Key versions of the Chatbot
 
 - **Four chatbots classified by complexity **: 
-  - `chatbot_lvl1_tools.py`: Basic Chatbot functionality with tools to interact with arxiv
-  - `chatbot_lvl2_mcp_v2.py`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
-  - `chatbot_lvl3_multi_mcp.py`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
-  - `chatbot_lvl4.py`: Advanced Chatbot multi-model processing with external MCP servers (adding prompts & resources)
+  - `chatbot_lvl1`: Basic Chatbot functionality with tools to interact with arxiv
+  - `chatbot_lvl2`: Enhanced Chatbot capabilities with MCP (2 tools from arxiv)
+  - `chatbot_lvl3`: Advanced Chatbot with multi MCP servers (adding fetch, Github & filesystem)
+  - `chatbot_lvl4`: Advanced Chatbot multi-model processing with external MCP servers (adding prompts & resources)
 
 - **MCP servers Integration**:
 
