@@ -1,5 +1,13 @@
 {
   "mcpServers": {
+    "filesystem": {
+      "server": {
+        "url": "https://7523d23c0cf7.ngrok-free.app/sse",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
     "legifrance": {
       "server": {
         "url": "http://127.0.0.1:8000/sse",
