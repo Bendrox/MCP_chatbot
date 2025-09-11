@@ -2,24 +2,25 @@
 
 ## 🧭 Overview
 
-This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered by OpenAI and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide several assistants and add‑ons that enable:
+This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered by GPT-5 models (OpenAI) and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide differet level of assistants and add‑ons that enable:
 
 - Retrieval and analysis of publications (arXiv)
 - Synthesis and organization of scientific content
-- Access to local resources (file system) and remote resources (Git repositories, HTTP fetch)
+- Access to local resources (file system) and remote resources (Git repositories, HTTP fetch website content)
 - Integration of local and remote MCP servers to extend capabilities (prompts, resources)
-- A homemade MCP server to retrieve data from **LégiFrance**
+- To retrieve data from **LégiFrance** with a homemade MCP server. 
 
 ## 🎯 Goal
 
-Provide a modular platform for experimenting with specialized search‑based conversational assistants capable of orchestrating multiple models and tools via MCP and automating tasks related to the collection, summarization, and management of legal and scientific content.
+Provide a modular platform with specialized search‑based conversational assistants capable of orchestrating multiple models and tools via MCP and automating tasks related to the collection, summarization, and management of legal and scientific content.
 
 ## 🧩 Chatbot Levels 
 
 - **chatbot\_lvl1** — Basic chatbot with local tools to interact with arXiv.
-- **chatbot\_lvl2** — Enhanced chatbot with a single MCP server (arXiv tools via “research”).
-- **chatbot\_lvl3** — Advanced chatbot using multiple MCP servers (filesystem, fetch, Git, research).
-- **chatbot\_lvl4** — Advanced multi‑model chatbot using external MCP servers, plus prompts and local resources.
+- **chatbot\_lvl2** — A chatbot with a single MCP server (with arXiv tools).
+- **chatbot\_lvl3** — Enhanced chatbot using multiple MCP servers (filesystem, fetch, Git, research).
+- **chatbot\_lvl4** — Advanced chatbot using external MCP servers, plus prompts and local resources.
+- **chatbot\_lvl5** — In development - Advanced chatbot using external MCP servers, plus prompts and local resources.
 
 ## 📁 Repository Structure (top‑level)
 
@@ -110,34 +111,22 @@ Provide a modular platform for experimenting with specialized search‑based con
 ```bash
 pip install -r requirements.txt
 ```
+- OpenAI and Claud Anthropic keys
+- LegiFrance Ids & keys
 
 ### 🛠️ Installation
 
-1. Clone the repository
-
-```bash
-git clone https://github.com/Bendrox/MCP_chatbot.git
-cd MCP_chatbot
-```
-
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
+*In progress*
 
 ## ▶️ Usage
 
 *In progress*
 
-## 🧱 Components
-
-*In progress*
 
 ## 🔗 Compatibility
 
 - The OpenAI API can connect to MCP servers as tools (`"type": "mcp"`) in `responses.create` calls **only for remote servers** (HTTP/SSE) via `server_url`; **stdio is not supported** there.
-- For **local servers (stdio)** such as filesystem, research, Git, use the **Agents SDK**, which can launch processes with `command`/`args`.
+- For **local MCP servers ( running with stdio)** such as filesystem and Git, docker and ngrok have been used to simulate a distant HTTP/SSE connection. 
 
 ## 🗺️ Roadmap / To‑Do
 
@@ -148,6 +137,7 @@ pip install -r requirements.txt
 - Make the MCP config path configurable (`MCP_SERVER_CONFIG` env, CLI flag, or class variable).
 - Adjust OpenAI model names to the versions available at runtime.
 - Explore related topics: OpenAI Agents SDK, Microsoft Learn MCP Server, Azure AI Foundry Agent Service.
+- explore other capabilities offered by Docker for mcp , cloudflare and GCP.
 
 ## ✍️ Author
 

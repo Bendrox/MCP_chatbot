@@ -1,4 +1,4 @@
-FROM node:20-alpin
+FROM node:20-alpine
 
 # Installe le proxy SSE et le serveur filesystem
 RUN npm i -g mcp-proxy@latest @modelcontextprotocol/server-filesystem@latest
