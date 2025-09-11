@@ -5,10 +5,10 @@
 This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered by GPT-5 models (OpenAI) and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide differet level of assistants and add‑ons that enable:
 
 - Retrieval and analysis of publications (arXiv)
-- Synthesis and organization of scientific content
+- Synthesis and organization of scientific or legal content
 - Access to local resources (file system) and remote resources (Git repositories, HTTP fetch website content)
 - Integration of local and remote MCP servers to extend capabilities (prompts, resources)
-- To retrieve data from **LégiFrance** with a homemade MCP server. 
+- Access to data from **LégiFrance** with a homemade MCP server. 
 
 ## 🎯 Goal
 
