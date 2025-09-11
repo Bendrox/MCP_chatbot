@@ -1,4 +1,4 @@
-# 🤖 MCP Chatbot: Multi‑Level Assistant
+# 🤖 MCP Chatbot a Multi‑Level Assistant for Academic and Legal Search  
 
 ## 🧭 Overview
 
