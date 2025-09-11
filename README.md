@@ -106,11 +106,7 @@ Provide a modular platform with specialized search‑based conversational assist
 ### 🧰 Prerequisites
 
 - Python **3.13.2**
-- Install required libraries:
-
-```bash
-pip install -r requirements.txt
-```
+- Install required libraries (in requirements.txt)
 - OpenAI and Claud Anthropic keys
 - LegiFrance Ids & keys
 
@@ -123,10 +119,14 @@ pip install -r requirements.txt
 *In progress*
 
 
-## 🔗 Compatibility
+## 🔗 Compatibility for OpenAI models
 
 - The OpenAI API can connect to MCP servers as tools (`"type": "mcp"`) in `responses.create` calls **only for remote servers** (HTTP/SSE) via `server_url`; **stdio is not supported** there.
 - For **local MCP servers ( running with stdio)** such as filesystem and Git, docker and ngrok have been used to simulate a distant HTTP/SSE connection. 
+
+## Proprietary code
+
+- The homemade MCP server for LegiFrance "remote_legifr_mcp_server.py" is not shared in the github repo. This will have the impact of depriving the chatbot of access to Legifrance content. 
 
 ## 🗺️ Roadmap / To‑Do
 
