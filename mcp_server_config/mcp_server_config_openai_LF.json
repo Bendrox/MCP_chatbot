@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "legifrance": {
+      "server": {
+        "url": "http://127.0.0.1:8000/sse",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  }
+}

@@ -7,15 +7,21 @@ from contextlib import AsyncExitStack
 import json
 import asyncio
 from openai import OpenAI
+import os 
 
 from llm.openai_models import OpenAI_5_mini, OpenAI_5_nano
+from get_token_legifr import get_token
 
 #load_dotenv()
 llm = OpenAI_5_nano()
 #llm = OpenAI_5_mini()
+github_barer=os.getenv('github_barer')
+
+## get LegiFrance token 
+token=get_token()
 
 # params
-max_tokens_param= 500
+max_tokens_param= 5000
 
 class ToolDefinition(TypedDict):
     name: str
@@ -53,7 +59,7 @@ class MCP_ChatBot:
             print(f"\nConnected to {server_name} with tools:", [t.name for t in tools])
 
 
-            for tool in tools: # new
+            for tool in tools: 
              self.tool_to_session[tool.name] = session
              self.available_tools.append({
               "name": tool.name,
@@ -64,13 +70,18 @@ class MCP_ChatBot:
         except Exception as e:
             print(f"Failed to connect to {server_name}: {e}")
 
-    async def connect_to_servers(self): # new
+    async def connect_to_servers(self): 
         """Connect to all configured MCP servers."""
         try:
-            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_openai.json", "r") as file:
-                data = json.load(file)
+            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_openai_v2.json", "r") as file:
+                mcp_server_config_data = json.load(file)
             
-            servers = data.get("mcpServers", {})
+            servers = mcp_server_config_data.get("mcpServers", {})
+            
+            ## inject github token 
+            for s in servers:
+                if s["server_label"] == "github":
+                    s["headers"]["Authorization"] = f"Bearer {github_barer}"
             
             for server_name, server_config in servers.items():
                 await self.connect_to_server(server_name, server_config)

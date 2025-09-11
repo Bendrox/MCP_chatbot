@@ -4,5 +4,5 @@ temp/
 __pycache__/
 mcp_env_v2/
 remote_time_mcp_server.py
-remote_legifr_mcp_server.py
+legifr_mcp_server_claude.py
 to_do.txt
