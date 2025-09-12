@@ -12,7 +12,7 @@
             
             "research": {
                 "command": "python3",
-                "args": ["local_mcp_servers/mcp_server_research.py"]
+                "args": ["local_mcp_servers_claude/mcp_server_research.py"]
             },
             
             "fetch": {
@@ -23,6 +23,13 @@
             "git":{
                 "command": "python3",
                 "args": ["-m", "mcp_server_git"]
+            },
+            
+            "github":{
+                "command": "npx",
+                "args": [
+                    "-m", 
+                    "mcp_server_git"]
             }
 
         }

@@ -57,7 +57,7 @@ markdown-it-py==4.0.0
 markdownify==1.2.0
 MarkupSafe==3.0.2
 matplotlib-inline==0.1.7
-mcp==1.13.1
+mcp @ git+https://github.com/modelcontextprotocol/python-sdk.git@c47c767ff437ee88a19e6b9001e2472cb6f7d5ed
 mcp-proxy==0.8.2
 mcp-server-fetch==2025.4.7
 mcp-server-git==2025.7.1
@@ -131,6 +131,7 @@ typing-inspection==0.4.1
 typing_extensions==4.15.0
 tzdata==2025.2
 urllib3==2.5.0
+uv==0.8.17
 uvicorn==0.35.0
 watchdog==6.0.0
 wcwidth==0.2.13

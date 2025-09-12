@@ -2,7 +2,7 @@
 
 ## 🧭 Overview
 
-This repository contains a set of multi‑tool chatbots (LvL1 → LvL4) powered by GPT-5 models (OpenAI) and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide differet level of assistants and add‑ons that enable:
+This repository contains a set of multi‑tool chatbots (LvL3 → LvL4) powered by GPT-5 models (OpenAI) and/or Claude (Anthropic), enhanced with the Model Context Protocol (MCP). The goal is to provide differet level of assistants and add‑ons that enable:
 
 - Retrieval and analysis of publications (arXiv)
 - Synthesis and organization of scientific or legal content
@@ -16,15 +16,12 @@ Provide a modular platform with specialized search‑based conversational assist
 
 ## 🧩 Chatbot Levels 
 
-- **chatbot\_lvl1** — Basic chatbot with local tools to interact with arXiv.
-- **chatbot\_lvl2** — A chatbot with a single MCP server (with arXiv tools).
 - **chatbot\_lvl3** — Enhanced chatbot using multiple MCP servers (filesystem, fetch, Git, research).
 - **chatbot\_lvl4** — Advanced chatbot using external MCP servers, plus prompts and local resources.
-- **chatbot\_lvl5** — In development - Advanced chatbot using external MCP servers, plus prompts and local resources.
+- **chatbot\_lvl5** — In development - Advanced multi model chatbot using external MCP servers, plus prompts and local resources.
 
 ## 📁 Repository Structure (top‑level)
 
-- `chatbot_lvl1_tools/` — Basic tools for the chatbot (e.g., arXiv interaction).
 - `chatbot_ouputs/` — (probable) directory for storing chatbot outputs.
 - `chatbots/` — Chatbot implementations (different levels/variants) with Claude (Anthropic).
 - `chatbots_openai/` — Specific integrations and agents with OpenAI’s GPT‑5.
@@ -39,26 +36,24 @@ Provide a modular platform with specialized search‑based conversational assist
 ## 🏗️ Project Architecture
 
 - `lanceur.py` — CLI launcher to run a chatbot version (LvL1 → LvL4)
-- `chatbots/`
-  - `chatbot_lvl1_tools.py` — Local chatbot with Python tools (arXiv)
-  - `chatbot_lvl2_mcp_tools.py` — Chatbot + 1 MCP server (research)
+- `chatbots_anthropic/`
   - `chatbot_lvl3_multi_mcp.py` — Chatbot with multiple MCP servers (filesystem, fetch, Git, research)
   - `chatbot_lvl4.py` — As LvL3, with MCP prompts and resources management
 - `chatbots_openai/`
   - `chatbot_lvl3.py` — LvL3 variant using OpenAI APIs
-- `chatbot_lvl1_tools/`
-  - `arxiv_tools_4_chatbot.py` — Local implementations of arXiv tools
 - `local_mcp_servers/`
   - `mcp_server_research.py` — MCP “research” server (arXiv tools)
   - `mcp_server_research_lvl4.py` — Same + resources (`papers://…`) + `generate_search_prompt` prompt
 - `mcp_server_config/`
-  - `mcp_server_config.json` — MCP server config for LvL2/LvL3
-  - `mcp_server_config_lvl4.json` — Config for LvL4 (including resources/prompts)
+  - `mcp_server_config_openai_FS_LF.json` — MCP server config for OpenAI chatbot
+  - `mcp_server_config_lvl3.json` — Config for antropic chatbot LvL3 (for multi MCP servers)
+  - `mcp_server_config_lvl4.json` — Config for antropic chatbot LvL4 (including MCP servers , resources & prompts)
+  
 - `llm/`
-  - `claude_models.py` — Anthropic wrappers (Claude 3.5/4)
-  - `openai_models.py` — OpenAI wrappers (GPT‑5 / 5‑nano / 5‑mini)
+  - `claude_models.py` — Anthropic wrappers models (Claude 3.5/4)
+  - `openai_models.py` — OpenAI wrappers models (GPT‑5 / 5‑nano / 5‑mini)
 - `notebooks/`
-  - `explore.ipynb`, `openai_mcp_chat.ipynb` — Demonstrations
+  - `explore.ipynb`, `openai_mcp_chat.ipynb` — Demonstrations + exploration
 - `chatbot_ouputs/` — Example outputs (MCP summaries)
 
 ## 🔌 MCP Servers & Integrations
@@ -66,6 +61,8 @@ Provide a modular platform with specialized search‑based conversational assist
 - **ArXiv** (in `arxiv_tools_4_chatbot.py`): retrieve and analyze research papers; search and extract information from academic repositories; support in‑depth exploration.
 - **Filesystem**: secure file operations with configurable access controls.
 - **GitHub**: tools to read, search, and manipulate Git repositories.
+- **Git**: 
+- **Git**: LegiFrance a homemade MCP server (not available in Github repo)
 - **Prompts**: search for papers, extract and organize information, then produce comprehensive summaries.
 - **Resources**: access to `papers://folders` (papers retrieved from arXiv).
 
@@ -80,17 +77,7 @@ Provide a modular platform with specialized search‑based conversational assist
   - `/prompts` → list available prompts
   - `/prompt <name> arg1=val1 …` → execute a prompt, then continue the conversation
 
-## ⚙️ How It Works — by Level
-
-**LvL1 — Local tools (no MCP)**
-
-- Tools: `search_papers(topic, max_results)`, `extract_info(paper_id)`
-- Flow: the LLM selects a tool → the local function runs → results are returned to the model → final answer is generated.
-
-**LvL2 — One MCP server (research)**
-
-- The client starts a local MCP server (arXiv tools) over stdio.
-- The LLM calls tools exposed by the server via MCP.
+## ⚙️ How It Works — Anthropic Chatbots by Level
 
 **LvL3 — Multi‑MCP**
 
@@ -126,7 +113,7 @@ Provide a modular platform with specialized search‑based conversational assist
 
 ## Proprietary code
 
-- The homemade MCP server for LegiFrance "remote_legifr_mcp_server.py" is not shared in the github repo. This will have the impact of depriving the chatbot of access to Legifrance content. 
+- The homemade MCP server for LegiFrance "legifr_mcp_server_claude.py" and "legifr_mcp_server_openai.py" are not shared in the github repo. This will deprive the chatbot of access to Legifrance content. 
 
 ## 🗺️ Roadmap / To‑Do
 

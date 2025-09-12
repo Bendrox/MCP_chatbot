@@ -7,3 +7,5 @@ remote_time_mcp_server.py
 legifr_mcp_server_claude.py
 legifr_mcp_server_openai.py
 to_do.txt
+/local_mcp_servers/mcp_server_research.py
+

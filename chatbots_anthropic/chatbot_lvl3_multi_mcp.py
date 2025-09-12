@@ -95,7 +95,7 @@ class MCP_ChatBot:
     async def connect_to_servers(self): # new
         """Connect to all configured MCP servers."""
         try:
-            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config.json", "r") as file:
+            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_lvl3.json", "r") as file:
                 data = json.load(file)
             
             servers = data.get("mcpServers", {})
