@@ -39,8 +39,8 @@ import asyncio
 from chatbots_anthropic.claude_models import Claude4, Claude35
 
 #load_dotenv()
-#llm = Claude35()
-llm = Claude4()
+llm = Claude35()
+#llm = Claude4()
 
 # params
 max_tokens_param= 5000

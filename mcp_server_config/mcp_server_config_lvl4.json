@@ -14,6 +14,10 @@
                 "command": "python3",
                 "args": ["/Users/oussa/Desktop/Github_perso/chatbot_mcp/local_mcp_servers/mcp_server_LegiFr.py"]
             },
+            "Ressources_prompt": {
+                "command": "python3",
+                "args": ["/Users/oussa/Desktop/Github_perso/chatbot_mcp/local_mcp_servers/mcp_server_lvl4.py"]
+            },
             
             "fetch": {
                 "command": "python3",
