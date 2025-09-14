@@ -2,7 +2,7 @@
   "mcpServers": {
     "filesystem": {
       "server": {
-        "url": "https://8efa8150119c.ngrok-free.app/sse",
+        "url": "https://af879cc52042.ngrok-free.app/sse",
         "headers": {
           "Content-Type": "application/json"
         }
