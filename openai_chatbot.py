@@ -21,6 +21,7 @@ class MCP_ChatBot:
     def __init__(self):
         self.exit_stack = AsyncExitStack()
         self.available_tools = []
+        self.sessions = [] # spe openai api , garde  sessions pour appeler les outils + tard
 
     async def connect_to_servers(self): 
         """Connect to all configured MCP servers."""
@@ -43,6 +44,8 @@ class MCP_ChatBot:
                 )
                 await session.initialize()
                 
+                self.sessions.append(session)
+                
                 tools = (await session.list_tools()).tools
                 print(f"✅ Connected to {server_name} with {len(tools)} tools: {[t.name for t in tools]}")
                 
@@ -54,18 +57,50 @@ class MCP_ChatBot:
                 
         except Exception as e:
             print(f"Error: {e}")
-
+        
     async def process_query(self, query):
-        """Process query with llm.generate_with_tools()."""
+        """Process query with tool execution."""
+        messages = [{'role': 'user', 'content': query}]
+        
         try:
             response = llm.generate_with_tools(
-                messages=[{'role': 'user', 'content': query}],
+                messages=messages,
                 max_tokens=max_tokens_param,
                 tools=self.available_tools
             )
-            print(response if isinstance(response, str) else f"Unexpected response: {response}")
+            
+            message = response.choices[0].message
+            
+            if message.content:
+                print(message.content)
+            elif message.tool_calls: # Liste des outils que le modèle veut appeler
+                print(f"Exécution de {len(message.tool_calls)} outil(s)...")
+                
+                # Exécuter chaque tool call
+                for tc in message.tool_calls:
+                    tool_name = tc.function.name # Nom de l'outil (ex: "getArticle_current_version_prod")
+                    tool_args = json.loads(tc.function.arguments) # Arguments JSON (ex: '{"textCid": "LEGIARTI000041577698"}')
+                    
+                    print(f"Appel: {tool_name}({tool_args})")
+                    
+                    # Trouver et exécuter l'outil
+                    result = await self._execute_tool(tool_name, tool_args)
+                    print(f"Résultat: {result[:200]}..." if len(result) > 200 else f"Résultat: {result}")
+            else:
+                print("Empty response")
+                
         except Exception as e:
             print(f"Error: {e}")
+
+    async def _execute_tool(self, tool_name, tool_args):
+        """Execute a tool on any available session."""
+        for session in self.sessions:
+            try:
+                result = await session.call_tool(tool_name, arguments=tool_args) # Exécute l'outil sur le serveur MCP
+                return result.content[0].text if result.content else "Outil exécuté"
+            except Exception:
+                continue
+        return f"Erreur: outil {tool_name} non trouvé"
 
     async def chat_loop(self):
         """Run interactive chat loop"""
