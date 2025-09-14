@@ -9,11 +9,11 @@ import logging
 
 logging.getLogger().setLevel(logging.ERROR)
 
-from chatbots_openai.openai_models import OpenAI_5_nano
-from get_token_legifr import get_token
+from chatbots_openai.openai_models import OpenAI_5_nano, OpenAI_5_mini
 
 load_dotenv()
-llm = OpenAI_5_nano()
+#llm = OpenAI_5_nano()
+llm = OpenAI_5_mini()
 max_tokens_param = 5000
 
 class MCP_ChatBot:
@@ -25,7 +25,9 @@ class MCP_ChatBot:
     async def connect_to_servers(self): 
         """Connect to all configured MCP servers."""
         try:
-            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_openai_FS_LF.json", "r") as file:
+            #with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_openai_FS_LF.json", "r") as file:
+            with open("/Users/oussa/Desktop/Github_perso/chatbot_mcp/mcp_server_config/mcp_server_config_openai_LF.json", "r") as file:
+            
                 config = json.load(file)
             
             for server_name, server_config in config.get("mcpServers", {}).items():
