@@ -59,45 +59,71 @@ class MCP_ChatBot:
             print(f"Error: {e}")
         
     async def process_query(self, query):
-        """Process query with tool execution."""
+        """Process query with tool execution and continuation."""
         messages = [{'role': 'user', 'content': query}]
         
-        try:
-            response = llm.generate_with_tools(
-                messages=messages,
-                max_tokens=max_tokens_param,
-                tools=self.available_tools
-            )
-            
-            message = response.choices[0].message
-            
-            if message.content:
-                print(message.content)
-            elif message.tool_calls: # Liste des outils que le modèle veut appeler
-                print(f"Exécution de {len(message.tool_calls)} outil(s)...")
+        while True:  # ← AJOUT : Boucle pour continuer après tool calls
+            try:
+                response = llm.generate_with_tools(
+                    messages=messages,
+                    max_tokens=max_tokens_param,
+                    tools=self.available_tools
+                )
                 
-                # Exécuter chaque tool call
-                for tc in message.tool_calls:
-                    tool_name = tc.function.name # Nom de l'outil (ex: "getArticle_current_version_prod")
-                    tool_args = json.loads(tc.function.arguments) # Arguments JSON (ex: '{"textCid": "LEGIARTI000041577698"}')
-                    
-                    print(f"Appel: {tool_name}({tool_args})")
-                    
-                    # Trouver et exécuter l'outil
-                    result = await self._execute_tool(tool_name, tool_args)
-                    print(f"Résultat: {result[:200]}..." if len(result) > 200 else f"Résultat: {result}")
-            else:
-                print("Empty response")
+                message = response.choices[0].message
                 
-        except Exception as e:
-            print(f"Error: {e}")
+                if message.content:
+                    # Réponse finale avec du texte
+                    print(message.content)
+                    break  # ← AJOUT : Sortir de la boucle
+                    
+                elif message.tool_calls:
+                    print(f"🔧 Exécution de {len(message.tool_calls)} outil(s)...")
+                    
+                    # ← AJOUT : Ajouter le message de l'assistant
+                    messages.append({
+                        'role': 'assistant',
+                        'content': None,
+                        'tool_calls': [{
+                            'id': tc.id,
+                            'type': tc.type,
+                            'function': {'name': tc.function.name, 'arguments': tc.function.arguments}
+                        } for tc in message.tool_calls]
+                    })
+                    
+                    # Exécuter chaque tool call
+                    for tc in message.tool_calls:
+                        tool_name = tc.function.name
+                        tool_args = json.loads(tc.function.arguments)
+                        
+                        print(f"Appel: {tool_name}({tool_args})")
+                        
+                        result = await self._execute_tool(tool_name, tool_args)
+                        print(f"Résultat: {result}")  # ← MODIF : Pas de coupure
+                        
+                        # ← AJOUT : Ajouter le résultat du tool call
+                        messages.append({
+                            'role': 'tool',
+                            'tool_call_id': tc.id,
+                            'content': result
+                        })
+                    
+                    # ← AJOUT : La boucle continue pour obtenir la réponse finale
+                    
+                else:
+                    print("Empty response")
+                    break
+                    
+            except Exception as e:
+                print(f"Error: {e}")
+                break
+        
 
     async def _execute_tool(self, tool_name, tool_args):
         """Execute a tool on any available session."""
         for session in self.sessions:
             try:
-                result = await session.call_tool(tool_name, arguments=tool_args) # Exécute l'outil sur le serveur MCP
-                return result.content[0].text if result.content else "Outil exécuté"
+                result = await session.call_tool(tool_name, arguments=tool_args) 
             except Exception:
                 continue
         return f"Erreur: outil {tool_name} non trouvé"
