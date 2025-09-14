@@ -9,7 +9,7 @@ import logging
 
 logging.getLogger().setLevel(logging.ERROR)
 
-from llm.openai_models import OpenAI_5_nano
+from chatbots_openai.openai_models import OpenAI_5_nano
 from get_token_legifr import get_token
 
 load_dotenv()

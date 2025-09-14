@@ -1,9 +1,9 @@
-# New version v3 adding multi client + external servers ( github + filesystem ): 
+#  lvl3 is adding multi client + external servers ( github , filesystem, git, fetch ): 
 
-# 1 - Instead of having one session, you now have a list of client sessions where each client session establishes a 1-to-1
+# 1 - Instead of having one session, here we a list of client sessions where each client session establishes a 1-to-1
 # connection to each server;
 
-# 2 - available_tools includes the definitions of all the tools exposed by all servers that the chatbot can connect to.
+# 2 - available_tools is definitions of all the tools exposed by all servers 
 
 # 3 - tool_to_session maps the tool name to the corresponding client session; in this way, when the LLM decides on a 
 # particular tool name, you can map it to the correct client session so you can use that session to send tool_call 
@@ -20,7 +20,7 @@
 # then a client session is created to connect to the server and get a description of the list of the tools provided by 
 # the server.
 
-# 6 - cleanup is a helper method that ensures all your connections are properly shut down when you're done with them. 
+# 6 - cleanup : ensures all your connections are properly shut down when you're done with them. 
 # In v2, we relied on the with statement to automatically clean up resources. 
 # This cleanup method serves a similar purpose, but for all the resources you've added to your exit_stack; 
 # it closes (your MCP clients and sessions) in the reverse order they were added - like stacking and unstacking plates.
@@ -36,14 +36,14 @@ from contextlib import AsyncExitStack
 import json
 import asyncio
 
-from llm.claude_models import Claude4, Claude35
+from chatbots_anthropic.claude_models import Claude4, Claude35
 
 #load_dotenv()
-llm = Claude35()
-#llm = Claude4()
+#llm = Claude35()
+llm = Claude4()
 
 # params
-max_tokens_param= 500
+max_tokens_param= 5000
 
 class ToolDefinition(TypedDict):
     name: str

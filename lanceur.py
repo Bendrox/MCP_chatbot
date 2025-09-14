@@ -1,11 +1,11 @@
 import os
-from llm.claude_models import Claude35
+from chatbots_anthropic.claude_models import Claude35
 
 chatbots = {
             "3": {
                 "name": "Chatbot LvL3 - Multi MCP",
-                "module": "chatbots_anthropic.chatbot_lvl3_multi_mcp", 
-                "description": "Advanced Chatbot with multi MCP servers (+ Fetch, Github & filesystem)"
+                "module": "chatbots_anthropic.chatbot_lvl3", 
+                "description": "Advanced Chatbot with multi MCP servers (Fetch, Github & filesystem)"
             },
             "4": {
                 "name": "Chatbot LvL4 - Advanced",

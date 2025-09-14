@@ -10,7 +10,7 @@
     },
     "legifrance": {
       "server": {
-        "url": "http://127.0.0.1:8000/sse",
+        "url": "https://8efa8150119c.ngrok-free.app/sse",
         "headers": {
           "Content-Type": "application/json"
         }

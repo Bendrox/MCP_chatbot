@@ -10,9 +10,9 @@
                 ]
             },
             
-            "research": {
+            "LegiFrance": {
                 "command": "python3",
-                "args": ["local_mcp_servers_claude/mcp_server_research.py"]
+                "args": ["/Users/oussa/Desktop/Github_perso/chatbot_mcp/local_mcp_servers/mcp_server_LegiFr.py"]
             },
             
             "fetch": {
@@ -28,8 +28,12 @@
             "github":{
                 "command": "npx",
                 "args": [
-                    "-m", 
-                    "mcp_server_git"]
+                    "-y", 
+                    "@modelcontextprotocol/server-github"
+                ],
+                "env": {
+                    "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_TOKEN>"
+                }
             }
 
         }

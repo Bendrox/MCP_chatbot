@@ -12,11 +12,11 @@ from contextlib import AsyncExitStack
 import json
 import asyncio
 
-from llm.claude_models import Claude35
+from chatbots_anthropic.claude_models import Claude35
 
 llm= Claude35()
 
-max_tokens_param= 350
+max_tokens_param= 2500
 
 load_dotenv()
 
