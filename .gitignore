@@ -9,3 +9,4 @@ to_do.txt
 /local_mcp_servers/mcp_server_research.py
 /local_mcp_servers/legifr_mcp_server_openai.py
 /local_mcp_servers/mcp_server_LegiFr.py
+/local_mcp_servers/mcp_server_LegiFr_OpenAI.py

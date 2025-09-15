@@ -10,6 +10,16 @@ logging.getLogger().setLevel(logging.ERROR)
 
 from chatbots_openai.openai_models import OpenAI_5_mini
 
+# pas top pour prod...
+import subprocess
+import atexit
+import time
+
+proc = subprocess.Popen(["python3", "local_mcp_servers/mcp_server_legifr_openai.py"])
+atexit.register(proc.terminate)
+time.sleep(3)  
+print("serveur MCP lanched")
+
 load_dotenv()
 llm = OpenAI_5_mini()
 
